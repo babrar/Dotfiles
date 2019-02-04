@@ -27,11 +27,10 @@ call plug#end()
 " colorscheme solarized
 " highlight Comment cterm=bold
 " let g:solarized_term_italics = 1  " set to 1 to enable italics in the terminal
-let g:solarized_termtrans = 1 " This gets rid of the grey background
+" let g:solarized_termtrans = 1       " This gets rid of the grey background
 set background=dark
-colorscheme solarized8_flat " remove the _flat suffix to obtain the OG scheme
-
-
+colorscheme solarized8_flat         " remove the _flat suffix to obtain the OG scheme
+hi Comment ctermfg = 241            " darken comment color for solarized theme  
 
 " Set syntax highlighting for *.ejs same as html
 au BufNewFile,BufRead *.ejs set filetype=html
