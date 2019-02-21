@@ -2,14 +2,14 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/babrar/.oh-my-zsh"
+export ZSH="/home/babrar/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="agnoster"
-
+# ZSH_THEME="powerlevel9k/powerlevel9k"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -73,6 +73,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# Customize to your needs...
+export LANG="en_US.UTF-8"
+
 # User configuration
 
 # Must use
@@ -85,14 +88,11 @@ export VISUAL=vim
 # ananconda3 snatches gsettings. Rename ~/ananconda/bin/gsettings to gsettings_conda
 export PATH="/home/babrar/anaconda3/bin:$PATH"
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='nvim'
 # fi
 
 # Compilation flags
@@ -118,6 +118,9 @@ if [ -n $TMUX  ]; then
     alias vim="TERM=screen-256color vim"
 fi
 
+if [ `which tmux 2> /dev/null` -a -z "$TMUX" ]; then
+    tmux -2 attach || tmux -2 new; exit
+fi
 # ============
 # GIT ALIASES
 # ============
@@ -141,6 +144,30 @@ function refreshenv ()
 {
 	source ~/.zshrc
 }
+
+# Add powerline to path
+if [ -d "$HOME/anaconda3/bin" ]; then
+    PATH="$HOME/anaconda3/bin:$PATH"
+fi
+
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1"  ] && \
+	    [ -s "$BASE16_SHELL/profile_helper.sh"  ] && \
+	            eval "$("$BASE16_SHELL/profile_helper.sh")"
+
+# Hide agnoster theme's username@host
+prompt_context() {
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    # prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
+  fi
+}
+
+# Add poweline config
+#if [[ -r ~/anaconda3/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+#    	source ~/anaconda3/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh
+#fi
