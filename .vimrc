@@ -14,19 +14,21 @@ Plug 'flazz/vim-colorschemes'
 Plug 'lifepillar/vim-solarized8'
 Plug 'scrooloose/nerdtree'
 Plug 'chriskempson/base16-vim'
-" Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe' " too slow
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
-" Better colorscheme over the default
-" let g:solarized_termcolors=16
-" let g:solarized_term_italics = 1    " set to 1 to enable italics in the terminal
-" let g:solarized_termtrans = 1       " This gets rid of the grey background
-let g:solarized_use16 = 0
-set background=dark
-colorscheme solarized8          " remove the _flat suffix to obtain the OG scheme
-" hi Comment ctermfg = 241              " darken comment color for solarized theme  
+" Colors {{{
+  " Better colorscheme over the default
+  " let g:solarized_termcolors=16
+  " let g:solarized_term_italics = 1    " set to 1 to enable italics in the terminal
+  " let g:solarized_termtrans = 1       " This gets rid of the grey background
+  let g:solarized_use16 = 0
+  set background=dark
+  colorscheme solarized8                " remove the _flat suffix to obtain the OG scheme
+  " hi Comment ctermfg = 241            " darken comment color for solarized theme  
+" }}}
 
 " Set syntax highlighting for *.ejs same as html
 au BufNewFile,BufRead *.ejs set filetype=html
@@ -38,12 +40,12 @@ set pastetoggle=<F2>
 " map <C-a> <esc>ggVG<CR>  # reserved for tmux
 
 " Crtl + c for copy visual selection
-" imap <C-c> "+y<CR>
+imap <C-c> "+y<CR>
 
 " Map Ctrl+V to paste, Ctrl+C to copy, paste shortcut with paste toggle
-imap <C-V> <C-R>*
-vmap <C-C> "+y
-nmap <C-V> "+p
+" imap <C-V> <C-R>*
+" vmap <C-C> "+y
+" nmap <C-V> "+p
 
 " Use CTRL-S for saving, also in Insert mode
 noremap <C-S> :update<CR>
@@ -57,56 +59,61 @@ inoremap <C-S> <C-O>:update<CR>
   set foldmethod=syntax                     " Folding based on file syntax
 " }}}
 
+" Backup {{{
+  set number                 " Set line numbers
+  set undodir^=~/.vim/undo/  " Directory to put undo files
+  set undofile
+  set nobackup               " No backup files
+  set nowritebackup          " No backup files while editing
+  set noswapfile             " No swap files tagbar settings
+" }}}
 
-set number                 " Set line numbers
-set undodir^=~/.vim/undo/  " Directory to put undo files
-set undofile
-set nobackup               " No backup files
-set nowritebackup          " No backup files while editing
-set noswapfile             " No swap files tagbar settings
+" Miscellaneous {{{
 
+  set showcmd                               " Show partial command while typing
+  set ruler                                 " Show line/column number of cursor
+  " set spell                                 " Spell checking on
+  set nostartofline                         " Don't reset cursor to line start  
+  set backspace=indent,eol,start            " Backspace for dummies
+  set linespace=0                           " No extra spaces between rows
+  set autowrite                             " Automatically save before :next
+  set autoread                              " Automatically reread changed files
+  set mouse=a                               " Automatically enable mouse usage
+  set mousehide                             " Hide the mouse cursor while typing
+  set hidden                                " Buffer settings
+  set showmode                              " Show current mode
+  set nowrap                                " Do not wrap long lines
+  set linebreak                             " Wrap lines at convenient points
+  set title                                 " Show filename in titlebar
+  set scrolloff=3                           " Scroll 3 lines before window edge
+  set showmatch                             " Highlight matching parenthesis
+  set clipboard=unnamed                     " Use OS clipboard
+  scriptencoding utf-8                      " Default to UTF-8 encoding
+" }}}
 
-" Miscellaneous :
+" Rust {{{
+  let g:rustfmt_autosave = 1                " Run :RustFmt on save
+" }}}
 
-    set showcmd                               " Show partial command while typing
-    set ruler                                 " Show line/column number of cursor
-    " set spell                                 " Spell checking on
-    set nostartofline                         " Don't reset cursor to line start  
-    set backspace=indent,eol,start            " Backspace for dummies
-    set linespace=0                           " No extra spaces between rows
-    set autowrite                             " Automatically save before :next
-    set autoread                              " Automatically reread changed files
-    set mouse=a                               " Automatically enable mouse usage
-    set mousehide                             " Hide the mouse cursor while typing
-    set hidden                                " Buffer settings
-    set showmode                              " Show current mode
-    set nowrap                                " Do not wrap long lines
-    set linebreak                             " Wrap lines at convenient points
-    set title                                 " Show filename in titlebar
-    set scrolloff=3                           " Scroll 3 lines before window edge
-    set showmatch                             " Highlight matching parenthesis
-    set clipboard=unnamed                     " Use OS clipboard
-    scriptencoding utf-8                      " Default to UTF-8 encoding
-
-" NERDTree :
-    " Open NERDTree automatically when vim opens a directory
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-    " Assign F9 for toggling NERDTree
-    map <F12> :NERDTreeToggle<CR>
-    " Close vim if NERDTree is the only open window
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-    " Change default arrows
-    let g:NERDTreeDirArrowExpandable = '▸'
-    let g:NERDTreeDirArrowCollapsible = '▾'
-
+" NERDTree {{{
+  " Open NERDTree automatically when vim opens a directory
+  autocmd StdinReadPre * let s:std_in=1
+  autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+  " Assign F9 for toggling NERDTree
+  map <F12> :NERDTreeToggle<CR>
+  " Close vim if NERDTree is the only open window
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+  " Change default arrows
+  let g:NERDTreeDirArrowExpandable = '▸'
+  let g:NERDTreeDirArrowCollapsible = '▾'
+" }}}
 
 " FastFold {{{
-	let g:fastfold_savehook = 0
-	let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
-	let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
-	let g:vimsyn_folding = 'af'
-	let g:tex_fold_enabled = 1
+  let g:fastfold_savehook = 0
+  let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+  let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+  let g:vimsyn_folding = 'af'
+  let g:tex_fold_enabled = 1
 " }}}
 
 " Base16 Shell

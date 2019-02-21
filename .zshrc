@@ -118,9 +118,14 @@ if [ -n $TMUX  ]; then
     alias vim="TERM=screen-256color vim"
 fi
 
+# Launch tmux on start up
 if [ `which tmux 2> /dev/null` -a -z "$TMUX" ]; then
     tmux -2 attach || tmux -2 new; exit
 fi
+
+# Rust
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+
 # ============
 # GIT ALIASES
 # ============

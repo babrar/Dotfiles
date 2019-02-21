@@ -3,12 +3,13 @@ if [ -z "$1" ]; then
 	exit 1
 fi
 
+cp ~/.profile $PWD/.profile
 cp ~/.zshrc $PWD/.zshrc
 cp ~/.vimrc $PWD/.vimrc
 cp ~/.bashrc $PWD/.bashrc
 cp ~/.tmux.conf $PWD/.tmux.conf
 
-# work to add .config for powerline
+# working to add .config for powerline
 
 git add .
 git commit -m "$1"
