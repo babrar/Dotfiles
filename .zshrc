@@ -88,6 +88,9 @@ export VISUAL=vim
 # ananconda3 snatches gsettings. Rename ~/ananconda/bin/gsettings to gsettings_conda
 export PATH="/home/babrar/anaconda3/bin:$PATH"
 
+# Add custom scripts to path
+export PATH="$PATH:/home/babrar/scripts"
+
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -119,9 +122,9 @@ if [ -n $TMUX  ]; then
 fi
 
 # Launch tmux on start up
-if [ `which tmux 2> /dev/null` -a -z "$TMUX" ]; then
-    tmux -2 attach || tmux -2 new; exit
-fi
+#if [ `which tmux 2> /dev/null` -a -z "$TMUX" ]; then
+#    tmux -2 attach || tmux -2 new; exit
+#fi
 
 # Rust
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"

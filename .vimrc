@@ -6,6 +6,8 @@ Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-sensible'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 Plug 'pangloss/vim-javascript'
 Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'
@@ -14,6 +16,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'lifepillar/vim-solarized8'
 Plug 'scrooloose/nerdtree'
 Plug 'chriskempson/base16-vim'
+" Plug 'Rip-Rip/clang_complete'
 " Plug 'Valloric/YouCompleteMe' " too slow
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 " List ends here. Plugins become visible to Vim after this call.
@@ -33,24 +36,43 @@ call plug#end()
 " Set syntax highlighting for *.ejs same as html
 au BufNewFile,BufRead *.ejs set filetype=html
 
-" Toggle for annoying indent on text paste
-set pastetoggle=<F2>
+" Bindings {{{
+  
+  " Change mapleader
+  let mapleader = ","
+  
+  " Toggle for annoying indent on text paste
+  set pastetoggle=<F2>
 
-" Traditional select all mapping
-" map <C-a> <esc>ggVG<CR>  # reserved for tmux
+  " Set Shift-t for TagBar toggling
+  nmap <S-t> :TagbarToggle<CR>
 
-" Crtl + c for copy visual selection
-imap <C-c> "+y<CR>
+  " Quicker exit from insert mode
+  " imap lp <Esc>l
+  
+  " Traditional select all mapping
+  " map <C-a> <esc>ggVG<CR>  # reserved for tmux
 
-" Map Ctrl+V to paste, Ctrl+C to copy, paste shortcut with paste toggle
-" imap <C-V> <C-R>*
-" vmap <C-C> "+y
-" nmap <C-V> "+p
+  " Crtl + c for copy visual selection
+  imap <C-c> "+y<CR>
+  
 
-" Use CTRL-S for saving, also in Insert mode
-noremap <C-S> :update<CR>
-vnoremap <C-S> <C-C>:update<CR>
-inoremap <C-S> <C-O>:update<CR>
+  " Space opens/closes folds
+  nnoremap <space> za
+
+  " Edit/load .vimrc bindings
+  nnoremap <leader>ev :vsp $MYVIMRC<CR>
+  nnoremap <leader>sv :source $MYVIMRC<CR>
+  " Map Ctrl+V to paste, Ctrl+C to copy, paste shortcut with paste toggle
+  " imap <C-V> <C-R>*
+  " vmap <C-C> "+y
+  " nmap <C-V> "+p
+
+  " Use CTRL-S for saving, also in Insert mode
+  noremap <C-S> :update<CR>
+  vnoremap <C-S> <C-C>:update<CR>
+  inoremap <C-S> <C-O>:update<CR>
+" }}}
 
 " Folding {{{
   set foldenable
@@ -95,12 +117,22 @@ inoremap <C-S> <C-O>:update<CR>
   let g:rustfmt_autosave = 1                " Run :RustFmt on save
 " }}}
 
+" Racer {{{
+  " set hidden
+  " let g:racer_cmd = "/home/babrar/.cargo/bin/racer"
+  let g:racer_experimental_completer = 1
+  au FileType rust nmap gd <Plug>(rust-def)
+  au FileType rust nmap gs <Plug>(rust-def-split)
+  au FileType rust nmap gx <Plug>(rust-def-vertical)
+  au FileType rust nmap <leader>gd <Plug>(rust-doc)
+" }}}
+
 " NERDTree {{{
   " Open NERDTree automatically when vim opens a directory
   autocmd StdinReadPre * let s:std_in=1
   autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-  " Assign F9 for toggling NERDTree
-  map <F12> :NERDTreeToggle<CR>
+  " Assign Crtl-n for toggling NERDTree
+  map <C-n> :NERDTreeToggle<CR>
   " Close vim if NERDTree is the only open window
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   " Change default arrows
@@ -122,11 +154,15 @@ if filereadable(expand("~/.vimrc_background"))
 	source ~/.vimrc_background
 endif
 
+" clang_complete {{{
+"  let g:clang_library_path='/usr/lib/llvm-6.0/lib'
+"  let g:clang_library_path='/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
+"  g:clang_auto_select = 1
+" }}}
+
 " Powerline bar
 set rtp+=$HOME/anaconda3/lib/python3.6/site-packages/powerline/bindings/vim/
 
 " Always show statusline
 set laststatus=2
 
-" Set Shift-t for TagBar toggling
-nmap <S-t> :TagbarToggle<CR>
