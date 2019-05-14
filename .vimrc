@@ -13,9 +13,10 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-endwise'
 Plug 'flazz/vim-colorschemes'
-Plug 'lifepillar/vim-solarized8'
+" Plug 'lifepillar/vim-solarized8'
 Plug 'scrooloose/nerdtree'
 Plug 'chriskempson/base16-vim'
+Plug 'terlar/base16-vim-powerline'
 " Plug 'Rip-Rip/clang_complete'
 " Plug 'Valloric/YouCompleteMe' " too slow
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
@@ -27,9 +28,9 @@ call plug#end()
   " let g:solarized_termcolors=16
   " let g:solarized_term_italics = 1    " set to 1 to enable italics in the terminal
   " let g:solarized_termtrans = 1       " This gets rid of the grey background
-  let g:solarized_use16 = 0
-  set background=dark
-  colorscheme solarized8                " remove the _flat suffix to obtain the OG scheme
+"  let g:solarized_use16 = 0
+"  set background=dark
+"  colorscheme solarized8                " remove the _flat suffix to obtain the OG scheme
   " hi Comment ctermfg = 241            " darken comment color for solarized theme  
 " }}}
 
@@ -161,7 +162,9 @@ endif
 " }}}
 
 " Powerline bar
-set rtp+=$HOME/anaconda3/lib/python3.6/site-packages/powerline/bindings/vim/
+set rtp+=$HOME/.local/lib/python3.6/site-packages/powerline/bindings/vim
+
+let g:Powerline_colorscheme = 'base16'
 
 " Always show statusline
 set laststatus=2

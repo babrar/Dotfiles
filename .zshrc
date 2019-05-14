@@ -86,7 +86,7 @@ export VISUAL=vim
 
 # added by Anaconda3 installer
 # ananconda3 snatches gsettings. Rename ~/ananconda/bin/gsettings to gsettings_conda
-export PATH="/home/babrar/anaconda3/bin:$PATH"
+# export PATH="/home/babrar/anaconda3/bin:$PATH"
 
 # Add custom scripts to path
 export PATH="$PATH:/home/babrar/scripts"
@@ -154,9 +154,9 @@ function refreshenv ()
 }
 
 # Add powerline to path
-if [ -d "$HOME/anaconda3/bin" ]; then
-    PATH="$HOME/anaconda3/bin:$PATH"
-fi
+#if [ -d "$HOME/anaconda3/bin" ]; then
+#    PATH="$HOME/anaconda3/bin:$PATH"
+#fi
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
