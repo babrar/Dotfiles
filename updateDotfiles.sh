@@ -13,6 +13,6 @@ cp ~/.tmux.conf $PWD/.tmux.conf
 
 git add .
 git commit -m "$1"
-git push origin master
+git push
 
 exit 0
