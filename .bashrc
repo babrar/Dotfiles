@@ -2,10 +2,15 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+ #JAVA HOME
+export PATH="/home/babrar/apache-maven-3.5.4/bin:$PATH"
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+export PATH="$JAVA_HOME/bin:$PATH"
+
 # Launch zsh
-#if [ -t 1 ]; then
-#       exec zsh
-#fi
+if [ -t 1 ]; then
+       exec zsh
+fi
 
 # If not running interactively, don't do anything
 case $- in
@@ -121,15 +126,5 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# added by Anaconda3 installer
-export PATH="/home/babrar/anaconda3/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        eval "$("$BASE16_SHELL/profile_helper.sh")"
-
+export PATH=/home/babrar/apache-maven-3.5.4/bin:$PATH
+export PATH=/usr/lib/jvm/java-8-openjdk-amd64/bin:$PATH

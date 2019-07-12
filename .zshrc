@@ -2,19 +2,19 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/babrar/.oh-my-zsh"
+  export ZSH="/home/babrar/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="agnoster"
-# ZSH_THEME="powerlevel9k/powerlevel9k"
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
 # If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "af-magic" "avit" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -25,6 +25,9 @@ ZSH_THEME="agnoster"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -46,9 +49,6 @@ ZSH_THEME="agnoster"
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Stop Ctrl-S from freezing term. Remapped as 'save' in vim.
-stty -ixon
-
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # You can set one of the optional three formats:
@@ -60,6 +60,9 @@ stty -ixon
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# Stop Ctrl-S from freezing term. Remapped as 'save' in vim.
+stty -ixon
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -69,104 +72,23 @@ plugins=(
   git
   git-extras
   command-not-found
+  docker
+  docker-compose
 )
-
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
-export LANG="en_US.UTF-8"
-
 # User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
 # Must use
 export EDITOR="vim"
 export GIT_EDITOR=vim
 export VISUAL=vim
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# added by Anaconda3 installer
-# ananconda3 snatches gsettings. Rename ~/ananconda/bin/gsettings to gsettings_conda
-# export PATH="/home/babrar/anaconda3/bin:$PATH"
-
-# Add custom scripts to path
-export PATH="$PATH:/home/babrar/scripts"
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-alias zshcfg="vim ~/.zshrc"
-alias zshconfig="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
-# alias from bash
 alias la='ls -A'
-alias py='python'
-
-if [ -n $TMUX  ]; then
-    alias vim="TERM=screen-256color vim"
-fi
-
-# Launch tmux on start up
-#if [ `which tmux 2> /dev/null` -a -z "$TMUX" ]; then
-#    tmux -2 attach || tmux -2 new; exit
-#fi
-
-# Rust
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-
-# ============
-# GIT ALIASES
-# ============
-alias add='git add'
-alias checkout='git checkout'
-alias clone='git clone'
-alias commit='git commit'
-alias prebase='git pull rebase'
-alias pull='git pull'
-alias push='git push'
-alias stash='git stash'
-alias status='git status'
-
-# FUNCTIONS
-function mkd ()
-{
-	mkdir -p -- "$1" && cd -P -- "$1"
-}
-
-function refreshenv ()
-{
-	source ~/.zshrc
-}
-
-# Add powerline to path
-#if [ -d "$HOME/anaconda3/bin" ]; then
-#    PATH="$HOME/anaconda3/bin:$PATH"
-#fi
-
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1"  ] && \
-	    [ -s "$BASE16_SHELL/profile_helper.sh"  ] && \
-	            eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 # Hide agnoster theme's username@host
 prompt_context() {
@@ -175,7 +97,58 @@ prompt_context() {
   fi
 }
 
-# Add poweline config
-#if [[ -r ~/anaconda3/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-#    	source ~/anaconda3/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh
-#fi
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+
+# Hadoop paths
+export HADOOP_HOME=$HOME/hadoop-2.7.3
+export HADOOP_CONF_DIR=$HOME/hadoop-2.7.3/etc/hadoop
+export HADOOP_MAPRED_HOME=$HOME/hadoop-2.7.3
+export HADOOP_COMMON_HOME=$HOME/hadoop-2.7.3
+export HADOOP_HDFS_HOME=$HOME/hadoop-2.7.3
+export YARN_HOME=$HOME/hadoop-2.7.3
+export HADOOP_COMMON_LIB_NATIVE=$HADOOP_HOME/lib/native
+export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib"
+export PATH=$PATH:$HOME/hadoop-2.7.3/bin
+export HADOOP_PID_DIR=$HOME/hadoop-2.7.3/hadoop2_data/hdfs/pid
+export HADOOP_OPTS="$HADOOP_OPTS -Dcom.amazonaws.services.s3.enableV4"
+
+#export HADOOP_HOME=$HOME/hadoop-3.2.0
+#export HADOOP_CONF_DIR=$HOME/hadoop-3.2.0/etc/hadoop
+#export HADOOP_MAPRED_HOME=$HOME/hadoop-3.2.0
+#export HADOOP_COMMON_HOME=$HOME/hadoop-3.2.0
+#export HADOOP_HDFS_HOME=$HOME/hadoop-3.2.0
+#export YARN_HOME=$HOME/hadoop-3.2.0
+#export HADOOP_COMMON_LIB_NATIVE=$HADOOP_HOME/lib/native
+#export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib"
+#export PATH=$PATH:$HOME/hadoop-3.2.0/bin
+#export HADOOP_PID_DIR=$HOME/hadoop-3.2.0/hadoop2_data/hdfs/pid
+#export HADOOP_OPTS="$HADOOP_OPTS -Djava.library.path=$HADOOP_HOME/lib/native"
+#export HADOOP_OPTS="$HADOOP_OPTS -Dcom.amazonaws.services.s3.enableV4"
+
+# Set HIVE_HOME
+export HIVE_HOME=$HOME/Desktop/apache-hive-2.1.0-bin
+export PATH=$PATH:$HOME/Desktop/apache-hive-2.1.0-bin/bin
+
+
+ #JAVA HOME
+export PATH="/home/babrar/apache-maven-3.5.4/bin:$PATH"
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+export PATH="$JAVA_HOME/bin:$PATH"
+

@@ -1,4 +1,4 @@
-" Plugins will be downloaded under the specified directory.
+"Plugins ns will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
@@ -13,29 +13,23 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-endwise'
 Plug 'flazz/vim-colorschemes'
-" Plug 'lifepillar/vim-solarized8'
+Plug 'lifepillar/vim-solarized8'
 Plug 'scrooloose/nerdtree'
 Plug 'chriskempson/base16-vim'
-Plug 'terlar/base16-vim-powerline'
+Plug 'ekalinin/Dockerfile.vim'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 " Plug 'Rip-Rip/clang_complete'
 " Plug 'Valloric/YouCompleteMe' " too slow
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
-" Colors {{{
-  " Better colorscheme over the default
-  " let g:solarized_termcolors=16
-  " let g:solarized_term_italics = 1    " set to 1 to enable italics in the terminal
-  " let g:solarized_termtrans = 1       " This gets rid of the grey background
-"  let g:solarized_use16 = 0
-"  set background=dark
-"  colorscheme solarized8                " remove the _flat suffix to obtain the OG scheme
-  " hi Comment ctermfg = 241            " darken comment color for solarized theme  
-" }}}
-
 " Set syntax highlighting for *.ejs same as html
 au BufNewFile,BufRead *.ejs set filetype=html
+" Set syntax highlighting for *.dev same as Dockerfile
+au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
+
 
 " Bindings {{{
   
@@ -49,7 +43,9 @@ au BufNewFile,BufRead *.ejs set filetype=html
   nmap <S-t> :TagbarToggle<CR>
 
   " Quicker exit from insert mode
-  " imap lp <Esc>l
+  noremap <C-q> <Esc>
+  vnoremap <C-q> <Esc>
+  inoremap <C-q> <Esc>
   
   " Traditional select all mapping
   " map <C-a> <esc>ggVG<CR>  # reserved for tmux
@@ -57,17 +53,12 @@ au BufNewFile,BufRead *.ejs set filetype=html
   " Crtl + c for copy visual selection
   imap <C-c> "+y<CR>
   
-
   " Space opens/closes folds
   nnoremap <space> za
 
   " Edit/load .vimrc bindings
   nnoremap <leader>ev :vsp $MYVIMRC<CR>
   nnoremap <leader>sv :source $MYVIMRC<CR>
-  " Map Ctrl+V to paste, Ctrl+C to copy, paste shortcut with paste toggle
-  " imap <C-V> <C-R>*
-  " vmap <C-C> "+y
-  " nmap <C-V> "+p
 
   " Use CTRL-S for saving, also in Insert mode
   noremap <C-S> :update<CR>
@@ -101,7 +92,9 @@ au BufNewFile,BufRead *.ejs set filetype=html
   set linespace=0                           " No extra spaces between rows
   set autowrite                             " Automatically save before :next
   set autoread                              " Automatically reread changed files
-  set mouse=a                               " Automatically enable mouse usage
+  " set mouse=a                               " Automatically enable mouse usage
+  set mouse=                                " Disable mouse
+  set ttymouse=                             " Disable mouse for tty
   set mousehide                             " Hide the mouse cursor while typing
   set hidden                                " Buffer settings
   set showmode                              " Show current mode
@@ -112,20 +105,6 @@ au BufNewFile,BufRead *.ejs set filetype=html
   set showmatch                             " Highlight matching parenthesis
   set clipboard=unnamed                     " Use OS clipboard
   scriptencoding utf-8                      " Default to UTF-8 encoding
-" }}}
-
-" Rust {{{
-  let g:rustfmt_autosave = 1                " Run :RustFmt on save
-" }}}
-
-" Racer {{{
-  " set hidden
-  " let g:racer_cmd = "/home/babrar/.cargo/bin/racer"
-  let g:racer_experimental_completer = 1
-  au FileType rust nmap gd <Plug>(rust-def)
-  au FileType rust nmap gs <Plug>(rust-def-split)
-  au FileType rust nmap gx <Plug>(rust-def-vertical)
-  au FileType rust nmap <leader>gd <Plug>(rust-doc)
 " }}}
 
 " NERDTree {{{
@@ -139,6 +118,8 @@ au BufNewFile,BufRead *.ejs set filetype=html
   " Change default arrows
   let g:NERDTreeDirArrowExpandable = '▸'
   let g:NERDTreeDirArrowCollapsible = '▾'
+  " Show hidden files
+  let g:NERDTreeShowHidden=1
 " }}}
 
 " FastFold {{{
@@ -155,16 +136,26 @@ if filereadable(expand("~/.vimrc_background"))
 	source ~/.vimrc_background
 endif
 
-" clang_complete {{{
-"  let g:clang_library_path='/usr/lib/llvm-6.0/lib'
-"  let g:clang_library_path='/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
-"  g:clang_auto_select = 1
+" airline {{{
+
+"if !exists('g:airline_symbols')
+"  let g:airline_symbols = {}
+"endif
+
+" powerline symbols
+"  let g:airline_left_sep = ''
+"  let g:airline_left_alt_sep = ''
+"  let g:airline_right_sep = ''
+"  let g:airline_right_alt_sep = ''
+"  let g:airline_symbols.branch = ''
+"  let g:airline_symbols.readonly = ''
+"  let g:airline_symbols.linenr = '☰'
+"  let g:airline_symbols.maxlinenr = ''
+  " let g:airline_symbols.dirty=⚡
 " }}}
 
 " Powerline bar
-set rtp+=$HOME/.local/lib/python3.6/site-packages/powerline/bindings/vim
-
-let g:Powerline_colorscheme = 'base16'
+set rtp+=$HOME/.local/lib/python3.7/site-packages/powerline/bindings/vim
 
 " Always show statusline
 set laststatus=2
