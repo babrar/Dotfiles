@@ -69,6 +69,8 @@ plugins=(
   git
   git-extras
   command-not-found
+  docker
+  docker-compose
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -85,12 +87,23 @@ export VISUAL=vim
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # added by Anaconda3 installer
-# ananconda3 snatches gsettings. Rename ~/ananconda/bin/gsettings to gsettings_conda
+# ananconda3 fetches gsettings. Rename ~/ananconda/bin/gsettings to gsettings_conda
 # export PATH="/home/babrar/anaconda3/bin:$PATH"
 
 # Add custom scripts to path
-export PATH="$PATH:/home/babrar/scripts"
+# export PATH="$PATH:/home/babrar/scripts"
 
+# JAVA_HOME
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+export PATH="$JAVA_HOME/bin:$PATH"
+
+# SCALA_HOME
+export SCALA_HOME="/usr/local/scala"
+export PATH="$SCALA_HOME/bin:$PATH"
+
+# SPARK_HOME
+export SPARK_HOME="/usr/local/spark"
+export PATH="$SPARK_HOME/bin:$PATH"
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -121,14 +134,6 @@ if [ -n $TMUX  ]; then
     alias vim="TERM=screen-256color vim"
 fi
 
-# Launch tmux on start up
-#if [ `which tmux 2> /dev/null` -a -z "$TMUX" ]; then
-#    tmux -2 attach || tmux -2 new; exit
-#fi
-
-# Rust
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-
 # ============
 # GIT ALIASES
 # ============
@@ -153,15 +158,6 @@ function refreshenv ()
 	source ~/.zshrc
 }
 
-# Add powerline to path
-#if [ -d "$HOME/anaconda3/bin" ]; then
-#    PATH="$HOME/anaconda3/bin:$PATH"
-#fi
-
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1"  ] && \
@@ -175,7 +171,3 @@ prompt_context() {
   fi
 }
 
-# Add poweline config
-#if [[ -r ~/anaconda3/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-#    	source ~/anaconda3/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh
-#fi

@@ -6,36 +6,28 @@ Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-sensible'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
 Plug 'pangloss/vim-javascript'
 Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-endwise'
 Plug 'flazz/vim-colorschemes'
-" Plug 'lifepillar/vim-solarized8'
 Plug 'scrooloose/nerdtree'
 Plug 'chriskempson/base16-vim'
+Plug 'ekalinin/Dockerfile.vim'
 Plug 'terlar/base16-vim-powerline'
-" Plug 'Rip-Rip/clang_complete'
-" Plug 'Valloric/YouCompleteMe' " too slow
-" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'ctrlpvim/ctrlp.vim'
+" Python
+Plug 'Valloric/YouCompleteMe'
+Plug 'nvie/vim-flake8'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'vim-syntastic/syntastic'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
-" Colors {{{
-  " Better colorscheme over the default
-  " let g:solarized_termcolors=16
-  " let g:solarized_term_italics = 1    " set to 1 to enable italics in the terminal
-  " let g:solarized_termtrans = 1       " This gets rid of the grey background
-"  let g:solarized_use16 = 0
-"  set background=dark
-"  colorscheme solarized8                " remove the _flat suffix to obtain the OG scheme
-  " hi Comment ctermfg = 241            " darken comment color for solarized theme  
-" }}}
-
 " Set syntax highlighting for *.ejs same as html
 au BufNewFile,BufRead *.ejs set filetype=html
+" Set syntax highlighting for *.dev same as Dockerfile
+au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 
 " Bindings {{{
   
@@ -47,16 +39,12 @@ au BufNewFile,BufRead *.ejs set filetype=html
 
   " Set Shift-t for TagBar toggling
   nmap <S-t> :TagbarToggle<CR>
-
+  " Quicker exit
+  nnoremap <C-d> :q<cr>
   " Quicker exit from insert mode
-  " imap lp <Esc>l
-  
-  " Traditional select all mapping
-  " map <C-a> <esc>ggVG<CR>  # reserved for tmux
-
-  " Crtl + c for copy visual selection
-  imap <C-c> "+y<CR>
-  
+  noremap <C-q> <Esc>
+  vnoremap <C-q> <Esc>
+  inoremap <C-q> <Esc>
 
   " Space opens/closes folds
   nnoremap <space> za
@@ -64,10 +52,6 @@ au BufNewFile,BufRead *.ejs set filetype=html
   " Edit/load .vimrc bindings
   nnoremap <leader>ev :vsp $MYVIMRC<CR>
   nnoremap <leader>sv :source $MYVIMRC<CR>
-  " Map Ctrl+V to paste, Ctrl+C to copy, paste shortcut with paste toggle
-  " imap <C-V> <C-R>*
-  " vmap <C-C> "+y
-  " nmap <C-V> "+p
 
   " Use CTRL-S for saving, also in Insert mode
   noremap <C-S> :update<CR>
@@ -95,13 +79,12 @@ au BufNewFile,BufRead *.ejs set filetype=html
 
   set showcmd                               " Show partial command while typing
   set ruler                                 " Show line/column number of cursor
-  " set spell                                 " Spell checking on
   set nostartofline                         " Don't reset cursor to line start  
   set backspace=indent,eol,start            " Backspace for dummies
   set linespace=0                           " No extra spaces between rows
   set autowrite                             " Automatically save before :next
   set autoread                              " Automatically reread changed files
-  set mouse=a                               " Automatically enable mouse usage
+  set mouse=                                " Automatically enable mouse usage
   set mousehide                             " Hide the mouse cursor while typing
   set hidden                                " Buffer settings
   set showmode                              " Show current mode
@@ -114,20 +97,22 @@ au BufNewFile,BufRead *.ejs set filetype=html
   scriptencoding utf-8                      " Default to UTF-8 encoding
 " }}}
 
-" Rust {{{
-  let g:rustfmt_autosave = 1                " Run :RustFmt on save
-" }}}
-
-" Racer {{{
-  " set hidden
-  " let g:racer_cmd = "/home/babrar/.cargo/bin/racer"
-  let g:racer_experimental_completer = 1
-  au FileType rust nmap gd <Plug>(rust-def)
-  au FileType rust nmap gs <Plug>(rust-def-split)
-  au FileType rust nmap gx <Plug>(rust-def-vertical)
-  au FileType rust nmap <leader>gd <Plug>(rust-doc)
-" }}}
-
+" Python
+  au BufNewFile, BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+  au BufRead, BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+  let g:ycm_autoclose_preview_window_after_completion=1
+  map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+  set encoding=utf-8
+  let python_highlight_all=1
+  syntax on
+  let g:ycm_use_clangd = 0
 " NERDTree {{{
   " Open NERDTree automatically when vim opens a directory
   autocmd StdinReadPre * let s:std_in=1
@@ -139,6 +124,7 @@ au BufNewFile,BufRead *.ejs set filetype=html
   " Change default arrows
   let g:NERDTreeDirArrowExpandable = '▸'
   let g:NERDTreeDirArrowCollapsible = '▾'
+  let g:NERDTreeShowHidden=1
 " }}}
 
 " FastFold {{{
@@ -155,14 +141,8 @@ if filereadable(expand("~/.vimrc_background"))
 	source ~/.vimrc_background
 endif
 
-" clang_complete {{{
-"  let g:clang_library_path='/usr/lib/llvm-6.0/lib'
-"  let g:clang_library_path='/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
-"  g:clang_auto_select = 1
-" }}}
-
 " Powerline bar
-set rtp+=$HOME/.local/lib/python3.6/site-packages/powerline/bindings/vim
+set rtp+=$HOME/.local/lib/python3.7/site-packages/powerline/bindings/vim
 
 let g:Powerline_colorscheme = 'base16'
 
