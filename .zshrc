@@ -81,7 +81,7 @@ export LANG="en_US.UTF-8"
 # User configuration
 
 # Must use
-export EDITOR="vim"
+export EDITOR="nvim"
 export GIT_EDITOR=vim
 export VISUAL=vim
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -98,12 +98,12 @@ export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 export PATH="$JAVA_HOME/bin:$PATH"
 
 # SCALA_HOME
-export SCALA_HOME="/usr/local/scala"
-export PATH="$SCALA_HOME/bin:$PATH"
+#export SCALA_HOME="/usr/local/scala"
+#export PATH="$SCALA_HOME/bin:$PATH"
 
 # SPARK_HOME
-export SPARK_HOME="/usr/local/spark"
-export PATH="$SPARK_HOME/bin:$PATH"
+#export SPARK_HOME="/usr/local/spark"
+#export PATH="$SPARK_HOME/bin:$PATH"
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'

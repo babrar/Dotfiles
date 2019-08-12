@@ -2,6 +2,8 @@
 call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-sensible'
 Plug 'octol/vim-cpp-enhanced-highlight'
@@ -10,11 +12,11 @@ Plug 'pangloss/vim-javascript'
 Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-endwise'
-Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
 Plug 'scrooloose/nerdtree'
 Plug 'chriskempson/base16-vim'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'terlar/base16-vim-powerline'
+" Plug 'terlar/base16-vim-powerline'
 Plug 'ctrlpvim/ctrlp.vim'
 " Python
 Plug 'Valloric/YouCompleteMe'
@@ -28,6 +30,11 @@ call plug#end()
 au BufNewFile,BufRead *.ejs set filetype=html
 " Set syntax highlighting for *.dev same as Dockerfile
 au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
+
+" Spacing {{{
+  set expandtab                             " Tabs are spaces
+  set tabstop=2 shiftwidth=2 softtabstop=2  " Default tabwidth
+" }}}
 
 " Bindings {{{
   
@@ -141,11 +148,10 @@ if filereadable(expand("~/.vimrc_background"))
 	source ~/.vimrc_background
 endif
 
-" Powerline bar
-set rtp+=$HOME/.local/lib/python3.7/site-packages/powerline/bindings/vim
+" Vim-Airline {{{
+  let g:airline_powerline_fonts = 1
+  let g:airline_theme='base16'
+" }}}
 
-let g:Powerline_colorscheme = 'base16'
-
-" Always show statusline
 set laststatus=2
 
