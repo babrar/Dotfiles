@@ -1,29 +1,35 @@
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
+" THEMING
+  " Plug 'vim-airline/vim-airline'
+  " Plug 'vim-airline/vim-airline-themes'
+  Plug 'powerline/powerline'
+  Plug 'chriskempson/base16-vim'
 
-" Declare the list of plugins.
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'Konfekt/FastFold'
-Plug 'tpope/vim-sensible'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'pangloss/vim-javascript'
-Plug 'jiangmiao/auto-pairs'
-Plug 'majutsushi/tagbar'
-Plug 'tpope/vim-endwise'
-" Plug 'flazz/vim-colorschemes'
-Plug 'scrooloose/nerdtree'
-Plug 'chriskempson/base16-vim'
-Plug 'ekalinin/Dockerfile.vim'
-" Plug 'terlar/base16-vim-powerline'
-Plug 'ctrlpvim/ctrlp.vim'
-" Python
-Plug 'Valloric/YouCompleteMe'
-Plug 'nvie/vim-flake8'
-Plug 'vim-scripts/indentpython.vim'
-Plug 'vim-syntastic/syntastic'
-" List ends here. Plugins become visible to Vim after this call.
+" NAVIGATION TOOLS
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'scrooloose/nerdtree'
+  Plug 'majutsushi/tagbar'
+
+" TEXTUAL PRODUCTIVITY TOOLS
+  Plug 'Konfekt/FastFold'
+  Plug 'tpope/vim-sensible'
+  Plug 'ntpeters/vim-better-whitespace'
+  Plug 'octol/vim-cpp-enhanced-highlight'
+  Plug 'editorconfig/editorconfig-vim'
+  Plug 'pangloss/vim-javascript'
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'tpope/vim-endwise'
+  Plug 'ekalinin/Dockerfile.vim'
+  Plug 'vim-syntastic/syntastic'
+
+" MISC TOOLS
+  Plug 'Valloric/YouCompleteMe'
+  Plug 'tpope/vim-fugitive'
+
+" PYTHON TOOLS
+  Plug 'nvie/vim-flake8'
+  Plug 'vim-scripts/indentpython.vim'
 call plug#end()
 
 " Set syntax highlighting for *.ejs same as html
@@ -37,10 +43,10 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 " }}}
 
 " Bindings {{{
-  
+
   " Change mapleader
   let mapleader = ","
-  
+
   " Toggle for annoying indent on text paste
   set pastetoggle=<F2>
 
@@ -83,10 +89,9 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 " }}}
 
 " Miscellaneous {{{
-
   set showcmd                               " Show partial command while typing
   set ruler                                 " Show line/column number of cursor
-  set nostartofline                         " Don't reset cursor to line start  
+  set nostartofline                         " Don't reset cursor to line start
   set backspace=indent,eol,start            " Backspace for dummies
   set linespace=0                           " No extra spaces between rows
   set autowrite                             " Automatically save before :next
@@ -102,9 +107,10 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   set showmatch                             " Highlight matching parenthesis
   set clipboard=unnamed                     " Use OS clipboard
   scriptencoding utf-8                      " Default to UTF-8 encoding
+  set encoding=utf-8
 " }}}
 
-" Python
+" Python {{{
   au BufNewFile, BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
@@ -116,10 +122,11 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   au BufRead, BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
   let g:ycm_autoclose_preview_window_after_completion=1
   map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-  set encoding=utf-8
   let python_highlight_all=1
   syntax on
   let g:ycm_use_clangd = 0
+" }}}
+
 " NERDTree {{{
   " Open NERDTree automatically when vim opens a directory
   autocmd StdinReadPre * let s:std_in=1
@@ -142,15 +149,15 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   let g:tex_fold_enabled = 1
 " }}}
 
-" Base16 Shell
+" Base16 Shell {{{
 if filereadable(expand("~/.vimrc_background"))
-	let base16colorspace=256
-	source ~/.vimrc_background
+  let base16colorspace=256
+  source ~/.vimrc_background
 endif
+" }}}
 
-" Vim-Airline {{{
-  let g:airline_powerline_fonts = 1
-  let g:airline_theme='base16'
+" Powerline bar {{{
+  set rtp+=$HOME/.local/lib/python3.7/site-packages/powerline/bindings/vim
 " }}}
 
 set laststatus=2
