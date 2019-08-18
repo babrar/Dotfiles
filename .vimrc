@@ -1,17 +1,18 @@
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
-" THEMING
-  " Plug 'vim-airline/vim-airline'
-  " Plug 'vim-airline/vim-airline-themes'
+
+  " THEMING
   Plug 'powerline/powerline'
   Plug 'chriskempson/base16-vim'
 
-" NAVIGATION TOOLS
+  " NAVIGATION/POWER TOOLS
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'scrooloose/nerdtree'
   Plug 'majutsushi/tagbar'
+  Plug 'tpope/vim-fugitive'
 
-" TEXTUAL PRODUCTIVITY TOOLS
+  " TEXTUAL PRODUCTIVITY TOOLS
+  Plug 'ervandew/supertab'
   Plug 'Konfekt/FastFold'
   Plug 'tpope/vim-sensible'
   Plug 'ntpeters/vim-better-whitespace'
@@ -22,14 +23,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-endwise'
   Plug 'ekalinin/Dockerfile.vim'
   Plug 'vim-syntastic/syntastic'
+  Plug 'Yggdroot/indentLine'
 
-" MISC TOOLS
-  Plug 'Valloric/YouCompleteMe'
-  Plug 'tpope/vim-fugitive'
-
-" PYTHON TOOLS
+  " PYTHON TOOLS
   Plug 'nvie/vim-flake8'
   Plug 'vim-scripts/indentpython.vim'
+
 call plug#end()
 
 " Set syntax highlighting for *.ejs same as html
@@ -43,40 +42,26 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 " }}}
 
 " Bindings {{{
-
-  " Change mapleader
-  let mapleader = ","
-
-  " Toggle for annoying indent on text paste
-  set pastetoggle=<F2>
-
-  " Set Shift-t for TagBar toggling
-  nmap <S-t> :TagbarToggle<CR>
-  " Quicker exit
-  nnoremap <C-d> :q<cr>
-  " Quicker exit from insert mode
-  noremap <C-q> <Esc>
+  let mapleader = ","          " Change mapleader
+  set pastetoggle=<F2>         " Toggle for annoying indent on text paste
+  nmap <S-t> :TagbarToggle<CR> " Set Shift-t for TagBar toggling
+  nnoremap <C-d> :q<cr>        " Quicker exit
+  noremap <C-q> <Esc>          " Quicker exit from insert mode
   vnoremap <C-q> <Esc>
   inoremap <C-q> <Esc>
-
-  " Space opens/closes folds
-  nnoremap <space> za
-
-  " Edit/load .vimrc bindings
-  nnoremap <leader>ev :vsp $MYVIMRC<CR>
+  nnoremap <space> za                       " Space opens/closes folds
+  nnoremap <leader>ev :vsp $MYVIMRC<CR>     " Edit/load .vimrc bindings
   nnoremap <leader>sv :source $MYVIMRC<CR>
-
-  " Use CTRL-S for saving, also in Insert mode
-  noremap <C-S> :update<CR>
+  noremap <C-S> :update<CR>        " Use CTRL-S for saving, also in Insert mode
   vnoremap <C-S> <C-C>:update<CR>
   inoremap <C-S> <C-O>:update<CR>
 " }}}
 
 " Folding {{{
   set foldenable
-  set foldlevelstart=10                     " Opens most folds by default
-  set foldnestmax=7                         " 8 nested fold max
-  set foldmethod=syntax                     " Folding based on file syntax
+  set foldlevelstart=10      " Opens most folds by default
+  set foldnestmax=7          " 8 nested fold max
+  set foldmethod=syntax      " Folding based on file syntax
 " }}}
 
 " Backup {{{
@@ -154,6 +139,10 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
+" }}}
+
+" Better-Whitespace {{{
+  let g:better_whitespace_ctermcolor=52 " dark red
 " }}}
 
 " Powerline bar {{{
