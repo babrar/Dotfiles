@@ -32,6 +32,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'nvie/vim-flake8'
   Plug 'vim-scripts/indentpython.vim'
   Plug 'deoplete-plugins/deoplete-jedi'
+  Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 call plug#end()
 
 filetype plugin indent on
