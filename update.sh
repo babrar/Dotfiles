@@ -7,6 +7,7 @@ update_configs () {
   cp ${HOME}/.zshrc .
   cp ${HOME}/.tmux.conf .
   cp ${HOME}/.vimrc .
+  cp ${HOME}/.config/nvim/init.vim .
 }
 
 update_configs
