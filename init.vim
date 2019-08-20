@@ -1,11 +1,14 @@
 " Plugins will be downloaded under the specified directory.
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
   " THEMING
-  Plug 'powerline/powerline'
+" Plug 'powerline/powerline'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
   Plug 'chriskempson/base16-vim'
 
   " NAVIGATION/POWER TOOLS
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'scrooloose/nerdtree'
   Plug 'majutsushi/tagbar'
@@ -28,9 +31,10 @@ call plug#begin('~/.vim/plugged')
   " PYTHON TOOLS
   Plug 'nvie/vim-flake8'
   Plug 'vim-scripts/indentpython.vim'
-
+  Plug 'deoplete-plugins/deoplete-jedi'
 call plug#end()
 
+filetype plugin indent on
 " Set syntax highlighting for *.ejs same as html
 au BufNewFile,BufRead *.ejs set filetype=html
 " Set syntax highlighting for *.dev same as Dockerfile
@@ -50,8 +54,8 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   vnoremap <C-q> <Esc>
   inoremap <C-q> <Esc>
   nnoremap <space> za                       " Space opens/closes folds
-  nnoremap <leader>ev :vsp $MYVIMRC<CR>     " Edit/load .vimrc bindings
-  nnoremap <leader>sv :source $MYVIMRC<CR>
+  nnoremap <leader>ev :vsp $MYNVIMRC<CR>     " Edit/load .vimrc bindings
+  nnoremap <leader>sv :source $MYNVIMRC<CR>
   noremap <C-S> :update<CR>        " Use CTRL-S for saving, also in Insert mode
   vnoremap <C-S> <C-C>:update<CR>
   inoremap <C-S> <C-O>:update<CR>
@@ -66,7 +70,7 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 
 " Backup {{{
   set number                 " Set line numbers
-  set undodir^=~/.vim/undo/  " Directory to put undo files
+  set undodir^=~/.config/nvim/undo/  " Directory to put undo files
   set undofile
   set nobackup               " No backup files
   set nowritebackup          " No backup files while editing
@@ -112,6 +116,11 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   let g:ycm_use_clangd = 0
 " }}}
 
+" Deoplete {{{
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#auto_complete_delay = 100
+" }}}
+
 " NERDTree {{{
   " Open NERDTree automatically when vim opens a directory
   autocmd StdinReadPre * let s:std_in=1
@@ -145,9 +154,8 @@ endif
   let g:better_whitespace_ctermcolor=52 " dark red
 " }}}
 
-" Powerline bar {{{
-  set rtp+=$HOME/.local/lib/python3.7/site-packages/powerline/bindings/vim
-" }}}
-
+" Vim-Airline {{
+  let g:airline_powerline_fonts = 1
+" {}}}
 set laststatus=2
 
