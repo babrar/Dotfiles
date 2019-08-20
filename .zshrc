@@ -126,9 +126,10 @@ export PATH="$JAVA_HOME/bin:$PATH"
 alias zshcfg="vim ~/.zshrc"
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
-# alias from bash
 alias la='ls -A'
 alias py='python'
+alias py3='python3'
+alias neo='nvim'
 
 if [ -n $TMUX  ]; then
     alias vim="TERM=screen-256color vim"
@@ -150,19 +151,19 @@ alias status='git status'
 # FUNCTIONS
 function mkd ()
 {
-	mkdir -p -- "$1" && cd -P -- "$1"
+  mkdir -p -- "$1" && cd -P -- "$1"
 }
 
 function refreshenv ()
 {
-	source ~/.zshrc
+  source ~/.zshrc
 }
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1"  ] && \
-	    [ -s "$BASE16_SHELL/profile_helper.sh"  ] && \
-	            eval "$("$BASE16_SHELL/profile_helper.sh")"
+    [ -s "$BASE16_SHELL/profile_helper.sh"  ] && \
+            eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 # Hide agnoster theme's username@host
 prompt_context() {
