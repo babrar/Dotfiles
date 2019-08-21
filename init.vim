@@ -47,17 +47,23 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 " }}}
 
 " Bindings {{{
-  let mapleader = ","          " Change mapleader
-  set pastetoggle=<F2>         " Toggle for annoying indent on text paste
-  nmap <S-t> :TagbarToggle<CR> " Set Shift-t for TagBar toggling
-  nnoremap <C-d> :q<cr>        " Quicker exit
-  noremap <C-q> <Esc>          " Quicker exit from insert mode
+  let mapleader = ","
+  " Toggle for indent on text paste
+  set pastetoggle=<F2>
+  " Quick exit
+  nnoremap <C-d> :q<cr>
+  " Quick jump to normal mode
+  noremap <C-q> <Esc>
   vnoremap <C-q> <Esc>
   inoremap <C-q> <Esc>
-  nnoremap <space> za                       " Space opens/closes folds
-  nnoremap <leader>ev :vsp $MYNVIMRC<CR>     " Edit/load .vimrc bindings
+  " Space opens/closes folds
+  nnoremap <space> za
+  " Edit/load init.vim bindings
+  nnoremap <leader>ev :vsp $MYNVIMRC<CR>
   nnoremap <leader>sv :source $MYNVIMRC<CR>
-  noremap <C-S> :update<CR>        " Use CTRL-S for saving, also in Insert mode
+  nmap <S-t> :TagbarToggle<CR> " Set Shift-t for TagBar toggling
+  " Use CTRL-S for saving
+  noremap <C-S> :update<CR>
   vnoremap <C-S> <C-C>:update<CR>
   inoremap <C-S> <C-O>:update<CR>
 " }}}
@@ -110,11 +116,6 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
     \ set autoindent |
     \ set fileformat=unix
   au BufRead, BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-  let g:ycm_autoclose_preview_window_after_completion=1
-  map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-  let python_highlight_all=1
-  syntax on
-  let g:ycm_use_clangd = 0
 " }}}
 
 " Deoplete {{{
@@ -153,10 +154,12 @@ endif
 
 " Better-Whitespace {{{
   let g:better_whitespace_ctermcolor=52 " dark red
+  let g:better_whitespace_enabled=0
+  let g:strip_whitespace_on_save=0
 " }}}
 
 " Vim-Airline {{
   let g:airline_powerline_fonts = 1
-" {}}}
+" }}}
 set laststatus=2
 
