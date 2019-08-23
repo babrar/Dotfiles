@@ -47,25 +47,19 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 " }}}
 
 " Bindings {{{
-  let mapleader = ","
-  " Toggle for indent on text paste
-  set pastetoggle=<F2>
-  " Quick exit
-  nnoremap <C-d> :q<cr>
-  " Quick jump to normal mode
-  noremap <C-q> <Esc>
-  vnoremap <C-q> <Esc>
-  inoremap <C-q> <Esc>
-  " Space opens/closes folds
-  nnoremap <space> za
-  " Edit/load init.vim bindings
-  nnoremap <leader>ev :vsp $MYNVIMRC<CR>
-  nnoremap <leader>sv :source $MYNVIMRC<CR>
-  nmap <S-t> :TagbarToggle<CR> " Set Shift-t for TagBar toggling
-  " Use CTRL-S for saving
-  noremap <C-S> :update<CR>
-  vnoremap <C-S> <C-C>:update<CR>
-  inoremap <C-S> <C-O>:update<CR>
+  let mapleader = ","                        " Change mapleader
+  set pastetoggle=<F2>                       " Toggle paste mode (not needed for nvim)
+  nnoremap <C-d> :q<cr>                      " Quick exit from vim in normal mode
+  noremap <C-q> <Esc>                        " Jump from visual to normal mode
+  vnoremap <C-q> <Esc>                       " Jump from insert to normal mode
+  inoremap <C-q> <Esc>                       " Idempotent C-q binding
+  nnoremap <space> za                        " Space opens/closes folds
+  nnoremap <leader>ev :vsp $MYNVIMRC<CR>     " Edit/load init.vim bindings
+  nnoremap <leader>sv :source $MYNVIMRC<CR>  " Edit/load init.vim bindings
+  nmap <S-t> :TagbarToggle<CR>               " Set Shift-t for TagBar toggling
+  noremap <C-S> :update<CR>                  " Use C-s for saving in normal mode
+  vnoremap <C-S> <C-C>:update<CR>            " Use C-s for saving in visual mode
+  inoremap <C-S> <C-O>:update<CR>            " Use C-s for saving in insert mode 
 " }}}
 
 " Folding {{{
