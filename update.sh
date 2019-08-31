@@ -8,6 +8,8 @@ update_configs () {
   cp ${HOME}/.tmux.conf .
   cp ${HOME}/.vimrc .
   cp ${HOME}/.config/nvim/init.vim .
+  cp ${HOME}/.config/alacritty/alacritty.yml .
+
 }
 
 update_configs
