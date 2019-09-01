@@ -2,7 +2,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
   " THEMING
-" Plug 'powerline/powerline'
+  " Plug 'powerline/powerline'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'chriskempson/base16-vim'
@@ -70,12 +70,12 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 " }}}
 
 " Backup {{{
-  set number                 " Set line numbers
-  set undodir^=~/.config/nvim/undo/  " Directory to put undo files
-  set undofile
-  set nobackup               " No backup files
-  set nowritebackup          " No backup files while editing
-  set noswapfile             " No swap files tagbar settings
+  set number                          " Set line numbers
+  set undodir^=~/.config/nvim/undo/   " Directory to put undo files
+  set undofile                        " Create undo files
+  set nobackup                        " No backup files
+  set nowritebackup                   " No backup files while editing
+  set noswapfile                      " No swap files tagbar settings
 " }}}
 
 " Miscellaneous {{{
@@ -113,6 +113,8 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 " }}}
 
 " Deoplete {{{
+  " Close preview window after completion
+  autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#auto_complete_delay = 100
 " }}}
@@ -140,10 +142,10 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 " }}}
 
 " Base16 Shell {{{
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+  if filereadable(expand("~/.vimrc_background"))
+    let base16colorspace=256
+    source ~/.vimrc_background
+  endif
 " }}}
 
 " Better-Whitespace {{{
@@ -155,5 +157,5 @@ endif
 " Vim-Airline {{
   let g:airline_powerline_fonts = 1
 " }}}
-set laststatus=2
 
+set laststatus=2
