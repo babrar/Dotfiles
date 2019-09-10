@@ -28,6 +28,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'vim-syntastic/syntastic'
   Plug 'Yggdroot/indentLine'
 
+  " C,C++ TOOLS
+  Plug 'deoplete-plugins/deoplete-clang'
+
   " PYTHON TOOLS
   Plug 'nvie/vim-flake8'
   Plug 'vim-scripts/indentpython.vim'
@@ -59,7 +62,7 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   nmap <S-t> :TagbarToggle<CR>               " Set Shift-t for TagBar toggling
   noremap <C-S> :update<CR>                  " Use C-s for saving in normal mode
   vnoremap <C-S> <C-C>:update<CR>            " Use C-s for saving in visual mode
-  inoremap <C-S> <C-O>:update<CR>            " Use C-s for saving in insert mode 
+  inoremap <C-S> <C-O>:update<CR>            " Use C-s for saving in insert mode
 " }}}
 
 " Folding {{{
@@ -117,6 +120,9 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#auto_complete_delay = 100
+  " Clang config
+  let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-8/lib/libclang-8.0.0.so'
+  let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-8/lib/clang'
 " }}}
 
 " NERDTree {{{
