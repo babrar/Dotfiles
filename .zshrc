@@ -86,16 +86,19 @@ export GIT_EDITOR=vim
 export VISUAL=vim
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# added by Anaconda3 installer
-# ananconda3 fetches gsettings. Rename ~/ananconda/bin/gsettings to gsettings_conda
-# export PATH="/home/babrar/anaconda3/bin:$PATH"
-
 # Add custom scripts to path
 # export PATH="$PATH:/home/babrar/scripts"
 
 # JAVA_HOME
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 export PATH="$JAVA_HOME/bin:$PATH"
+
+# CONFIG
+export MYNVIMRC="$HOME/.config/nvim/init.vim"
+
+# CLANG
+#export CLANG_HOME="$HOME/llvm-project/build"
+#export PATH="$CLANG_HOME/bin:$PATH"
 
 # SCALA_HOME
 #export SCALA_HOME="/usr/local/scala"
@@ -126,10 +129,10 @@ export PATH="$JAVA_HOME/bin:$PATH"
 alias zshcfg="vim ~/.zshrc"
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
+alias nv="nvim"
+# alias from bash
 alias la='ls -A'
 alias py='python'
-alias py3='python3'
-alias neo='nvim'
 
 if [ -n $TMUX  ]; then
     alias vim="TERM=screen-256color vim"

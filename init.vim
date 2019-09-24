@@ -27,6 +27,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'ekalinin/Dockerfile.vim'
   Plug 'vim-syntastic/syntastic'
   Plug 'Yggdroot/indentLine'
+  Plug 'tomtom/tcomment_vim'  " Easily comment with gc
 
   " C,C++ TOOLS
   Plug 'deoplete-plugins/deoplete-clang'
