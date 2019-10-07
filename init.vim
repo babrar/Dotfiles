@@ -53,17 +53,18 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 " Bindings {{{
   let mapleader = ","                        " Change mapleader
   set pastetoggle=<F2>                       " Toggle paste mode (not needed for nvim)
-  nnoremap <C-d> :q<cr>                      " Quick exit from vim in normal mode
-  noremap <C-q> <Esc>                        " Jump from visual to normal mode
-  vnoremap <C-q> <Esc>                       " Jump from insert to normal mode
-  inoremap <C-q> <Esc>                       " Idempotent C-q binding
+  nnoremap <C-d> :q<cr>                      " Exit from vim in normal mode
+  noremap <C-f> <Esc>                        " Idempotent binding
+  vnoremap <C-f> <Esc>                       " Jump from visual to normal mode
+  inoremap <C-f> <Esc>                       " Jumpt from insert to normal mode
   nnoremap <space> za                        " Space opens/closes folds
   nnoremap <leader>ev :vsp $MYNVIMRC<CR>     " Edit/load init.vim bindings
   nnoremap <leader>sv :source $MYNVIMRC<CR>  " Edit/load init.vim bindings
   nmap <S-t> :TagbarToggle<CR>               " Set Shift-t for TagBar toggling
   noremap <C-S> :update<CR>                  " Use C-s for saving in normal mode
   vnoremap <C-S> <C-C>:update<CR>            " Use C-s for saving in visual mode
-  inoremap <C-S> <C-O>:update<CR>            " Use C-s for saving in insert mode
+  "inoremap <C-S> <C-O>:update<CR>           " No esc ins save. rm this cmt
+  inoremap <C-S> <Esc>:update<CR>            " Use C-s to escape from insert mode and save
 " }}}
 
 " Folding {{{
@@ -114,6 +115,12 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
     \ set autoindent |
     \ set fileformat=unix
   au BufRead, BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+  " Mute style warnings
+  let g:syntastic_quiet_messages = {
+        \ "!level":  "errors",
+        \ "type":    "style",
+        \ "regex":   '.*',
+        \ "file:p":  '.*' }
 " }}}
 
 " Deoplete {{{
@@ -159,6 +166,11 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   let g:better_whitespace_ctermcolor=52 " dark red
   let g:better_whitespace_enabled=0
   let g:strip_whitespace_on_save=0
+" }}}
+
+" Supertab {{{
+  " Reverse tab order in dropdown list
+  let g:SuperTabDefaultCompletionType = "<c-n>"
 " }}}
 
 " Vim-Airline {{

@@ -83,7 +83,7 @@ export LANG="en_US.UTF-8"
 # Must use
 export EDITOR="nvim"
 export GIT_EDITOR=vim
-export VISUAL=vim
+export VISUAL=nvim
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # Add custom scripts to path
@@ -126,16 +126,15 @@ export MYNVIMRC="$HOME/.config/nvim/init.vim"
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshcfg="vim ~/.zshrc"
-alias zshconfig="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
+alias zc="nvim ~/.zshrc"
 alias nv="nvim"
 # alias from bash
 alias la='ls -A'
-alias py='python'
+alias py='python3'
 
 if [ -n $TMUX  ]; then
     alias vim="TERM=screen-256color vim"
+    alias nvim="TERM=screen-256color nvim"
 fi
 
 # ============
