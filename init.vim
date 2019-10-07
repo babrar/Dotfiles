@@ -115,12 +115,8 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
     \ set autoindent |
     \ set fileformat=unix
   au BufRead, BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-  " Mute style warnings
-  let g:syntastic_quiet_messages = {
-        \ "!level":  "errors",
-        \ "type":    "style",
-        \ "regex":   '.*',
-        \ "file:p":  '.*' }
+  " Mute warnings
+  let g:syntastic_quiet_messages = { 'level': 'warnings' }
 " }}}
 
 " Deoplete {{{
