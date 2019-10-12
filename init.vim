@@ -51,20 +51,28 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 " }}}
 
 " Bindings {{{
-  let mapleader = ","                        " Change mapleader
-  set pastetoggle=<F2>                       " Toggle paste mode (not needed for nvim)
-  nnoremap <C-d> :q<cr>                      " Exit from vim in normal mode
-  noremap <C-f> <Esc>                        " Idempotent binding
-  vnoremap <C-f> <Esc>                       " Jump from visual to normal mode
-  inoremap <C-f> <Esc>                       " Jumpt from insert to normal mode
-  nnoremap <space> za                        " Space opens/closes folds
-  nnoremap <leader>ev :vsp $MYNVIMRC<CR>     " Edit/load init.vim bindings
-  nnoremap <leader>sv :source $MYNVIMRC<CR>  " Edit/load init.vim bindings
-  nmap <S-t> :TagbarToggle<CR>               " Set Shift-t for TagBar toggling
-  noremap <C-S> :update<CR>                  " Use C-s for saving in normal mode
-  vnoremap <C-S> <C-C>:update<CR>            " Use C-s for saving in visual mode
-  "inoremap <C-S> <C-O>:update<CR>           " No esc ins save. rm this cmt
-  inoremap <C-S> <Esc>:update<CR>            " Use C-s to escape from insert mode and save
+  " Change mapleader
+  let mapleader = ","
+  " Toggle paste mode (not needed for nvim)
+  set pastetoggle=<F2>
+  " Exit from vim in normal mode
+  nnoremap <C-D> :q<cr>
+  " C-C mapped to Esc by default in all modes except Normal 
+  noremap <C-C> <Esc>
+  " Space opens/closes folds
+  nnoremap <space> za
+  " Edit/load init.vim bindings
+  nnoremap <leader>ev :vsp $MYNVIMRC<CR> 
+  " Edit/load init.vim bindings
+  nnoremap <leader>sv :source $MYNVIMRC<CR>
+  " Use C-s for saving in normal mode
+  noremap <C-S> :update<CR>
+  " Use C-s for saving in visual mode
+  vnoremap <C-S> <C-C>:update<CR>
+  " Stay in insert mode after save
+  "inoremap <C-S> <C-O>:update<CR>
+  " Use C-s to escape from insert mode and save
+  inoremap <C-S> <Esc>:update<CR>
 " }}}
 
 " Folding {{{
@@ -115,8 +123,6 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
     \ set autoindent |
     \ set fileformat=unix
   au BufRead, BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-  " Mute warnings
-  let g:syntastic_quiet_messages = { 'level': 'warnings' }
 " }}}
 
 " Deoplete {{{
@@ -125,8 +131,14 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#auto_complete_delay = 100
   " Clang config
-  let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-8/lib/libclang-8.0.0.so'
-  let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-8/lib/clang'
+  let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-9/lib/libclang.so'
+  let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-9/lib/clang'
+" }}}
+
+" Syntastic {{{
+  " Mute warnings
+  let g:syntastic_quiet_messages = { 'level': 'warnings' }
+  let g:syntastic_cpp_checkers = ['clang_tidy']
 " }}}
 
 " NERDTree {{{

@@ -19,7 +19,7 @@ window:
   # If both are `0`, this setting is ignored.
   dimensions:
     columns: 84
-    lines: 25
+    lines: 30
 
   # Window position (changes require restart)
   #
@@ -102,21 +102,21 @@ tabspaces: 8
 font:
   # The normal (roman) font face to use.
   normal:
-    family: Meslo LG S for Powerline
+    family: Source Code Pro for Powerline
     # Style can be specified to pick a specific face.
-    # style: Regular
+    style: Regular
 
   # The bold font face
   bold:
-    family: Meslo LG S for Powerline
+    family: Source Code Pro for Powerline
     # Style can be specified to pick a specific face.
-    # style: Bold
+    style: Bold
 
   # The italic font face
   italic:
-    family: Meslo LG S for Powerline
+    family: Source Code Pro for Powerline
     # Style can be specified to pick a specific face.
-    # style: Italic
+    style: Italic
 
   # Point size
   size: 11.0
@@ -125,14 +125,14 @@ font:
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
     x: 0
-    y: 0
+    y: 3
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the right,
   # increasing `y` moves the glyph upwards.
   glyph_offset:
     x: 0
-    y: 0
+    y: 1
 
   # Thin stroke font rendering (macOS only)
   #

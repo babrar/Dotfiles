@@ -69,8 +69,8 @@ plugins=(
   git
   git-extras
   command-not-found
-  docker
-  docker-compose
+  # docker
+  # docker-compose
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -82,7 +82,7 @@ export LANG="en_US.UTF-8"
 
 # Must use
 export EDITOR="nvim"
-export GIT_EDITOR=vim
+export GIT_EDITOR=nvim
 export VISUAL=nvim
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -90,8 +90,8 @@ export VISUAL=nvim
 # export PATH="$PATH:/home/babrar/scripts"
 
 # JAVA_HOME
-export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
-export PATH="$JAVA_HOME/bin:$PATH"
+#export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+#export PATH="$JAVA_HOME/bin:$PATH"
 
 # CONFIG
 export MYNVIMRC="$HOME/.config/nvim/init.vim"

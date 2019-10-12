@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Update necessary configs
-set -ex
+set -x
 
 update_configs () {
   cp ${HOME}/.bashrc .
