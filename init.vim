@@ -55,6 +55,8 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   let mapleader = ","
   " Toggle paste mode (not needed for nvim)
   set pastetoggle=<F2>
+  " Toggle Tagbar
+  nmap <S-T> :TagbarToggle<CR>
   " Exit from vim in normal mode
   nnoremap <C-D> :q<cr>
   " C-C mapped to Esc by default in all modes except Normal 
@@ -63,16 +65,25 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   nnoremap <space> za
   " Edit/load init.vim bindings
   nnoremap <leader>ev :vsp $MYNVIMRC<CR> 
-  " Edit/load init.vim bindings
   nnoremap <leader>sv :source $MYNVIMRC<CR>
-  " Use C-s for saving in normal mode
+  " Use C-s for saving
   noremap <C-S> :update<CR>
-  " Use C-s for saving in visual mode
   vnoremap <C-S> <C-C>:update<CR>
   " Stay in insert mode after save
   "inoremap <C-S> <C-O>:update<CR>
-  " Use C-s to escape from insert mode and save
   inoremap <C-S> <Esc>:update<CR>
+  " Quick switch tabs
+  nnoremap <C-E> gt
+  vnoremap <C-E> gt
+  inoremap <C-E> gt
+
+  nnoremap <C-Q> gT
+  vnoremap <C-Q> gT
+  inoremap <C-Q> gT
+  " Delete for real
+  nnoremap <leader>d "_d
+  xnoremap <leader>d "_d
+  xnoremap <leader>p "_dP
 " }}}
 
 " Folding {{{
@@ -99,7 +110,7 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   set linespace=0                           " No extra spaces between rows
   set autowrite                             " Automatically save before :next
   set autoread                              " Automatically reread changed files
-  set mouse=                                " Automatically enable mouse usage
+  set mouse=a                               " Automatically enable mouse usage
   set mousehide                             " Hide the mouse cursor while typing
   set hidden                                " Buffer settings
   set showmode                              " Show current mode

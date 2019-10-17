@@ -69,8 +69,8 @@ plugins=(
   git
   git-extras
   command-not-found
-  # docker
-  # docker-compose
+  docker
+  docker-compose
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -93,12 +93,11 @@ export VISUAL=nvim
 #export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 #export PATH="$JAVA_HOME/bin:$PATH"
 
+# GO
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/.local/lib/golib
 # CONFIG
 export MYNVIMRC="$HOME/.config/nvim/init.vim"
-
-# CLANG
-#export CLANG_HOME="$HOME/llvm-project/build"
-#export PATH="$CLANG_HOME/bin:$PATH"
 
 # SCALA_HOME
 #export SCALA_HOME="/usr/local/scala"
@@ -107,6 +106,7 @@ export MYNVIMRC="$HOME/.config/nvim/init.vim"
 # SPARK_HOME
 #export SPARK_HOME="/usr/local/spark"
 #export PATH="$SPARK_HOME/bin:$PATH"
+
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -174,3 +174,7 @@ prompt_context() {
   fi
 }
 
+# Finally fire up tmux if inside an interactive shell
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
