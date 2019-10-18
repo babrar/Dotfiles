@@ -96,6 +96,7 @@ export VISUAL=nvim
 # GO
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/.local/lib/golib
+export PATH=$PATH:$GOPATH/bin
 # CONFIG
 export MYNVIMRC="$HOME/.config/nvim/init.vim"
 
