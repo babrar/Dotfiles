@@ -34,7 +34,7 @@ setup_color() {
 
 install_essentials(){
   # essential utilities
-  sudo apt-get install -y g++ clang llvm-dev wget curl git neovim
+  sudo apt-get install -y g++ clang llvm-dev wget curl git neovim wmctrl xdotool libinput-tools
 }
 
 install_python(){
@@ -95,7 +95,7 @@ customize_vim(){
   # vim -c "PlugInstall | q | q"
   nvim -c "PlugInstall | q | q"
   # Install some plugin dependencies
-  python3 -m pip install flake8 --user 
+  python3 -m pip install flake8 --user
 }
 
 customize_shell(){
@@ -117,12 +117,12 @@ customize_shell(){
 }
 
 install_alacritty(){
-	wget https://github.com/jwilm/alacritty/releases/download/v0.3.3/Alacritty-v0.3.3-ubuntu_18_04_amd64.deb
-	sudo dpkg -i Alacritty-v0.3.3-ubuntu_18_04_amd64.deb
-	sudo apt-get install -f
-	rm -f $HOME/.config/alacritty/alacritty.yml
+  wget https://github.com/jwilm/alacritty/releases/download/v0.3.3/Alacritty-v0.3.3-ubuntu_18_04_amd64.deb
+  sudo dpkg -i Alacritty-v0.3.3-ubuntu_18_04_amd64.deb
+  sudo apt-get install -f
+  rm -f $HOME/.config/alacritty/alacritty.yml
   mkdir -p $HOME/.config/alacritty
-	cp $DOTFILEDIR/alacritty.yml $HOME/.config/alacritty/
+  cp $DOTFILEDIR/alacritty.yml $HOME/.config/alacritty/
 }
 
 install_powerline_fonts(){
@@ -135,6 +135,15 @@ install_powerline_fonts(){
   cd ..
   rm -rf fonts
 }
+
+setup_gestures() {
+  sudo gpasswd -a $USER input
+  git clone https://github.com/bulletmark/libinput-gestures
+  cd libinput-gestures
+  sudo. /libinput-gestures-setup install
+  cd ..
+  cp $DOTFILEDIR/libinput-gestures.conf
+}
 # Core setup
 check_script_dir
 setup_color
@@ -142,9 +151,10 @@ install_python
 install_essentials
 get_dotfiles
 customize_vim
+setup_gestures
 
 # Additional setup
-# install_misc_tools
+install_misc_tools
 # install_docker
 
 # Final setup
@@ -154,5 +164,16 @@ install_alacritty
 # clean up
 sudo apt-get autoremove -y
 
-echo "${GREEN}Setup complete. Log out and log back in to let changes take effect.
-Use alacritty instead of gnome terminal. For best results, use base16_material-darker theme.${RESET}"
+printf "$GREEN"
+cat <<-'EOF'
+Setup Complete! Log out and log back in for changes.
+
+To obtain gestures, after logging in run :
+    libinput-gestures-setup restart
+
+TIPS:
+Use alacritty instead of gnome-terminal
+Use base16_material-darker theme for best results
+EOF
+printf "$RESET"
+

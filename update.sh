@@ -10,6 +10,7 @@ update_configs () {
   cp ${HOME}/.config/nvim/init.vim .
   cp ${HOME}/.config/alacritty/alacritty.yml .
   cp /etc/default/tlp ./tlp/
+  cp ${HOME}/.config/libinput-gestures.conf .
 }
 
 update_configs
