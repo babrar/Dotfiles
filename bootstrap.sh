@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 # A quick bootstrap script for setting up a new Ubuntu/debian system
 
-#set -x
+# TO-DO:
+# Soften Alacritty version. Always download the latest version
+# Soften clang version in vimrc.
+# Add gestures to startup commands (update end comments afterwards)
+
+set -x
 sudo apt-get update
 
 check_script_dir(){
@@ -47,10 +52,10 @@ install_python(){
 
 get_dotfiles(){
   git clone https://github.com/babrar/Dotfiles.git
-  export DOTFILEDIR=$HOME/Dotfiles
+  export DOTFILES_DIR=$HOME/Dotfiles
 }
 
-# Machine independant
+# Machine independant (Debian specific instruction is mentioned elsewhere)
 install_docker_ce(){
   # Install Docker
   sudo apt-get update
@@ -87,10 +92,10 @@ customize_vim(){
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   # fetch vim config
-  # cp $DOTFILEDIR/.vimrc .
+  # cp $DOTFILES_DIR/.vimrc .
   # fetch nvim config
   mkdir -p ~/.config/nvim
-  cp $DOTFILEDIR/init.vim ~/.config/nvim/
+  cp $DOTFILES_DIR/init.vim ~/.config/nvim/
   # Install vim plugins
   # vim -c "PlugInstall | q | q"
   nvim -c "PlugInstall | q | q"
@@ -100,7 +105,7 @@ customize_vim(){
 
 customize_shell(){
   sudo apt-get install -y zsh tmux
-  cp $DOTFILEDIR/.tmux.conf .
+  cp $DOTFILES_DIR/.tmux.conf .
   # install oh-my-zsh
   wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
   # Dont run zsh after installation
@@ -111,9 +116,11 @@ customize_shell(){
   # powerline fonts
   install_powerline_fonts
   # fetch zsh configs
-  cp $DOTFILEDIR/.zshrc $HOME
+  cp $DOTFILES_DIR/.zshrc $HOME
   this_user=$(whoami)
   sed -i "s/babrar/$this_user/g" .zshrc
+  # remove install files
+  rm -f install.sh
 }
 
 install_alacritty(){
@@ -122,7 +129,11 @@ install_alacritty(){
   sudo apt-get install -f
   rm -f $HOME/.config/alacritty/alacritty.yml
   mkdir -p $HOME/.config/alacritty
-  cp $DOTFILEDIR/alacritty.yml $HOME/.config/alacritty/
+  cp $DOTFILES_DIR/alacritty.yml $HOME/.config/alacritty/
+  # set as default terminal
+  gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/alacritty
+  # remove install files
+  rm -f Alacritty-v0.3.3-ubuntu_18_04_amd64.deb
 }
 
 install_powerline_fonts(){
@@ -142,8 +153,15 @@ setup_gestures() {
   cd libinput-gestures
   sudo. /libinput-gestures-setup install
   cd ..
-  cp $DOTFILEDIR/libinput-gestures.conf
+  cp $DOTFILES_DIR/libinput-gestures.conf ./config/
 }
+
+customize_gnome() {
+# enable fractional scaling for X11
+gsettings set org.gnome.mutter experimental-features "['x11-randr-fractional-scaling']"
+}
+
+
 # Core setup
 check_script_dir
 setup_color
@@ -155,25 +173,41 @@ setup_gestures
 
 # Additional setup
 install_misc_tools
-# install_docker
+#install_docker
 
 # Final setup
 customize_shell
 install_alacritty
+customize_gnome
 
 # clean up
 sudo apt-get autoremove -y
 
 printf "$GREEN"
 cat <<-'EOF'
-Setup Complete! Log out and log back in for changes.
+                                 /$$    
+                                | $$    
+ /$$   /$$  /$$$$$$   /$$$$$$  /$$$$$$  
+| $$  | $$ /$$__  $$ /$$__  $$|_  $$_/  
+| $$  | $$| $$$$$$$$| $$$$$$$$  | $$    
+| $$  | $$| $$_____/| $$_____/  | $$ /$$
+|  $$$$$$$|  $$$$$$$|  $$$$$$$  |  $$$$/
+ \____  $$ \_______/ \_______/   \___/  
+ /$$  | $$                              
+|  $$$$$$/                              
+ \______/                               
+
+Setup Complete! Restart for changes.
 
 To obtain gestures, after logging in run :
-    libinput-gestures-setup restart
+  
+  libinput-gestures-setup start
+
+To automate the process, add the command above to startup commands.
 
 TIPS:
-Use alacritty instead of gnome-terminal
-Use base16_material-darker theme for best results
+Use alacritty instead of gnome-terminal.
+Use base16_material-darker theme for best results.
 EOF
 printf "$RESET"
 
