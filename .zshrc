@@ -132,7 +132,7 @@ alias zc="nvim ~/.zshrc"
 alias nv="nvim"
 # alias from bash
 alias la='ls -A'
-alias py='python3'
+alias py3='python3'
 
 if [ -n $TMUX  ]; then
     alias vim="TERM=screen-256color vim"

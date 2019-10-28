@@ -39,7 +39,7 @@ setup_color() {
 
 install_essentials(){
   # essential utilities
-  sudo apt-get install -y g++ clang llvm-dev wget curl git neovim wmctrl xdotool libinput-tools
+  sudo apt-get install -y g++ clang llvm-dev cmake wget curl git neovim wmctrl xdotool libinput-tools
 }
 
 install_python(){

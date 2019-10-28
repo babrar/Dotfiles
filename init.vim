@@ -84,6 +84,8 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   nnoremap <leader>d "_d
   xnoremap <leader>d "_d
   xnoremap <leader>p "_dP
+  " Copy to system clipboard
+  noremap <leader>y "+y
 " }}}
 
 " Folding {{{
