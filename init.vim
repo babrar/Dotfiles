@@ -2,7 +2,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
   " THEMING
-  " Plug 'powerline/powerline'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'chriskempson/base16-vim'
@@ -69,20 +68,21 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   " Use C-s for saving
   noremap <C-S> :update<CR>
   vnoremap <C-S> <C-C>:update<CR>
-  " Stay in insert mode after save
-  "inoremap <C-S> <C-O>:update<CR>
   inoremap <C-S> <Esc>:update<CR>
   " Quick switch tabs
   nnoremap <C-E> gt
   vnoremap <C-E> gt
   inoremap <C-E> gt
-
   nnoremap <C-Q> gT
   vnoremap <C-Q> gT
   inoremap <C-Q> gT
   " Delete for real
   nnoremap <leader>d "_d
   xnoremap <leader>d "_d
+  nnoremap <leader>x "_x
+  xnoremap <leader>x "_x
+  nnoremap <BS> "_x
+  xnoremap <BS> "_x
   xnoremap <leader>p "_dP
   " Copy to system clipboard
   noremap <leader>y "+y
