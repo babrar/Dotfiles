@@ -130,9 +130,9 @@ export MYNVIMRC="$HOME/.config/nvim/init.vim"
 # Example aliases
 alias zc="nvim ~/.zshrc"
 alias nv="nvim"
-# alias from bash
 alias la='ls -A'
 alias py3='python3'
+alias ports='sudo lsof -i -P -n | grep LISTEN'
 
 if [ -n $TMUX  ]; then
     alias vim="TERM=screen-256color vim"

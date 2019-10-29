@@ -45,8 +45,8 @@ install_essentials(){
 install_python(){
   # install python dependencies
   sudo apt-get install -y python-pip
-  sudo apt-get install -y python-pip
-  sudo apt-get install -y python3-dev
+  sudo apt-get install -y python3-pip
+  sudo apt-get install -y python-dev
   sudo apt-get install -y python3-dev
 }
 
@@ -80,7 +80,7 @@ install_docker(){
 }
 
 install_misc_tools(){
-  sudo apt-get install -y screenfetch neofetch htop
+  sudo apt-get install -y screenfetch neofetch htop mlocate
 }
 
 customize_vim(){
@@ -159,6 +159,8 @@ setup_gestures() {
 customize_gnome() {
 # enable fractional scaling for X11
 gsettings set org.gnome.mutter experimental-features "['x11-randr-fractional-scaling']"
+# turn off bluetooth by default
+sudo systemctl disable bluetooth.service
 }
 
 
