@@ -40,6 +40,7 @@ setup_color() {
 install_essentials(){
   # essential utilities
   sudo apt-get install -y g++ clang llvm-dev cmake wget curl git neovim wmctrl xdotool libinput-tools
+  sudo ln -s /usr/lib/llvm-9/lib/libclang-9.so.1 /usr/lib/llvm-9/lib/libclang.so
 }
 
 install_python(){
