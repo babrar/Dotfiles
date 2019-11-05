@@ -85,7 +85,7 @@ install_misc_tools(){
 }
 
 customize_vim(){
-  sudo apt-get install ctags
+  sudo apt-get install ctags clang-tidy
   # vim-plug
   # curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   #     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

@@ -81,8 +81,6 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   xnoremap <leader>d "_d
   nnoremap <leader>x "_x
   xnoremap <leader>x "_x
-  nnoremap <BS> "_x
-  xnoremap <BS> "_x
   xnoremap <leader>p "_dP
   " Copy to system clipboard
   noremap <leader>y "+y
