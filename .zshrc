@@ -70,7 +70,7 @@ plugins=(
   git-extras
   command-not-found
   docker
-  docker-compose
+  npm
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -86,8 +86,8 @@ export GIT_EDITOR=nvim
 export VISUAL=nvim
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# Add custom scripts to path
-# export PATH="$PATH:/home/babrar/scripts"
+# Add local lib to path
+export PATH="$PATH:$HOME/.local/bin"
 
 # JAVA_HOME
 #export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
@@ -98,7 +98,13 @@ export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/.local/lib/golib
 export PATH=$PATH:$GOPATH/bin
 export GOPATH=$GOPATH:$HOME/golib
-# CONFIG
+
+# NODEJS
+NODE_VERSION=v12.13.0
+DISTRO=linux-x64
+export PATH=/usr/local/lib/nodejs/node-$NODE_VERSION-$DISTRO/bin:$PATH
+
+# VIM
 export MYNVIMRC="$HOME/.config/nvim/init.vim"
 
 # SCALA_HOME

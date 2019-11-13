@@ -18,21 +18,22 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'Konfekt/FastFold'
   Plug 'tpope/vim-sensible'
   Plug 'ntpeters/vim-better-whitespace'
-  Plug 'octol/vim-cpp-enhanced-highlight'
   Plug 'editorconfig/editorconfig-vim'
-  Plug 'pangloss/vim-javascript'
   Plug 'jiangmiao/auto-pairs'
   Plug 'tpope/vim-endwise'
   Plug 'ekalinin/Dockerfile.vim'
-  Plug 'vim-syntastic/syntastic'
   Plug 'Yggdroot/indentLine'
   Plug 'tomtom/tcomment_vim'  " Easily comment with gc
+  Plug 'neomake/neomake'
 
+  " JS TOOLS
+  Plug 'pangloss/vim-javascript'
+  
   " C,C++ TOOLS
   Plug 'deoplete-plugins/deoplete-clang'
+  Plug 'octol/vim-cpp-enhanced-highlight'
 
   " PYTHON TOOLS
-  Plug 'nvie/vim-flake8'
   Plug 'vim-scripts/indentpython.vim'
   Plug 'deoplete-plugins/deoplete-jedi'
   Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
@@ -49,7 +50,7 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   set tabstop=2 shiftwidth=2 softtabstop=2  " Default tabwidth
 " }}}
 
-" Bindings {{{
+" General Bindings {{{
   " Change mapleader
   let mapleader = ","
   " Toggle paste mode (not needed for nvim)
@@ -58,8 +59,10 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   nmap <S-T> :TagbarToggle<CR>
   " Exit from vim in normal mode
   nnoremap <C-D> :q<cr>
-  " C-C mapped to Esc by default in all modes except Normal 
-  noremap <C-C> <Esc>
+  " Esc is too far 
+  nnoremap <C-C> <Esc>
+  vnoremap <C-C> <Esc>
+  inoremap <C-C> <Esc>
   " Space opens/closes folds
   nnoremap <space> za
   " Edit/load init.vim bindings
@@ -117,23 +120,12 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   set nowrap                                " Do not wrap long lines
   set linebreak                             " Wrap lines at convenient points
   set title                                 " Show filename in titlebar
+  set splitbelow                            " Show preview at bottom
   set scrolloff=3                           " Scroll 3 lines before window edge
   set showmatch                             " Highlight matching parenthesis
   set clipboard=unnamed                     " Use OS clipboard
   scriptencoding utf-8                      " Default to UTF-8 encoding
   set encoding=utf-8
-" }}}
-
-" Python {{{
-  au BufNewFile, BufRead *.py
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=79 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix
-  au BufRead, BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 " }}}
 
 " Deoplete {{{
@@ -146,11 +138,12 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-9/lib/clang'
 " }}}
 
-" Syntastic {{{
-  " Mute warnings
-  let g:syntastic_quiet_messages = { 'level': 'warnings' }
-  let g:syntastic_cpp_checkers = ['clang_tidy']
-" }}}
+" Neomake {{{
+  call neomake#configure#automake('w')
+  let g:neomake_javascript_enabled_makers = ['eslint']
+  let g:neomake_python_enabled_makers = ['flake8']
+  nnoremap <leader>lo :lopen <CR>
+  " }}}
 
 " NERDTree {{{
   " Open NERDTree automatically when vim opens a directory
@@ -174,13 +167,6 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
   let g:tex_fold_enabled = 1
 " }}}
 
-" Base16 Shell {{{
-  if filereadable(expand("~/.vimrc_background"))
-    let base16colorspace=256
-    source ~/.vimrc_background
-  endif
-" }}}
-
 " Better-Whitespace {{{
   let g:better_whitespace_ctermcolor=52 " dark red
   let g:better_whitespace_enabled=0
@@ -195,5 +181,33 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 " Vim-Airline {{
   let g:airline_powerline_fonts = 1
 " }}}
+
+" Base16 Shell {{{
+  if filereadable(expand("~/.vimrc_background"))
+    let base16colorspace=256
+    source ~/.vimrc_background
+  endif
+" }}}
+
+" Python {{{
+  autocmd BufNewFile, BufRead *.py
+    \ setlocal tabstop=4 |
+    \ setlocal softtabstop=4 |
+    \ setlocal shiftwidth=4 |
+    \ setlocal textwidth=79 |
+    \ setlocal expandtab |
+    \ setlocal autoindent |
+    \ setlocal fileformat=unix |
+  autocmd BufRead, BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" }}}
+
+" C++ {{{
+  au BufNewFile, BufRead *.cpp,*.cc,*.hpp,*.h,*.c
+    \ setlocal expandtab |
+    \ setlocal tabstop=4 |
+    \ setlocal softtabstop=4 |
+    \ setlocal shiftwidth=4
+" }}}
+
 
 set laststatus=2

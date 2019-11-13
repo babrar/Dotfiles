@@ -180,7 +180,7 @@ install_misc_tools
 
 # Final setup
 customize_shell
-install_alacritty
+#install_alacritty
 customize_gnome
 
 # clean up
