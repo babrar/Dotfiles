@@ -85,22 +85,19 @@ install_misc_tools(){
 }
 
 customize_vim(){
-  sudo apt-get install ctags clang-tidy
   # vim-plug
   # curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   #     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  # vim-plug (neovim)
-  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   # fetch vim config
   # cp $DOTFILES_DIR/.vimrc .
-  # fetch nvim config
+  # vim -c "PlugInstall | q | q"
+  sudo apt-get install ctags clang-tidy
+  # nvim-plug
+  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   mkdir -p ~/.config/nvim
   cp $DOTFILES_DIR/init.vim ~/.config/nvim/
-  # Install vim plugins
-  # vim -c "PlugInstall | q | q"
-  nvim -c "PlugInstall | q | q"
-  # Install some plugin dependencies
+  nvim -c "PlugInstall |q |q"
   python3 -m pip install flake8 --user
 }
 
@@ -211,6 +208,7 @@ To automate the process, add the command above to startup commands.
 TIPS:
 Use alacritty instead of gnome-terminal.
 Use base16_material-darker theme for best results.
+For JS development in nvim, run :CocInstall coc-tsserver 
 EOF
 printf "$RESET"
 

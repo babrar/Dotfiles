@@ -25,6 +25,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'Yggdroot/indentLine'
   Plug 'tomtom/tcomment_vim'  " Easily comment with gc
   Plug 'neomake/neomake'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   " JS TOOLS
   Plug 'pangloss/vim-javascript'
@@ -42,8 +43,6 @@ call plug#end()
 filetype plugin indent on
 " Set syntax highlighting for *.ejs same as html
 au BufNewFile,BufRead *.ejs set filetype=html
-" Set syntax highlighting for *.dev same as Dockerfile
-au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 
 " Spacing {{{
   set expandtab                             " Tabs are spaces
@@ -140,8 +139,11 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 
 " Neomake {{{
   call neomake#configure#automake('w')
-  let g:neomake_javascript_enabled_makers = ['eslint']
+  " using clang since clang-tidy is too expensive
+  let g:neomake_cpp_enabled_makers = ['clang']
   let g:neomake_python_enabled_makers = ['flake8']
+  " disable NM for js. use coc instead.
+  let g:neomake_javascript_enabled_makers = []
   nnoremap <leader>lo :lopen <CR>
   " }}}
 
@@ -190,24 +192,21 @@ au BufNewFile,BufRead Dockefile.dev set filetype=Dockerfile
 " }}}
 
 " Python {{{
-  autocmd BufNewFile, BufRead *.py
-    \ setlocal tabstop=4 |
-    \ setlocal softtabstop=4 |
-    \ setlocal shiftwidth=4 |
-    \ setlocal textwidth=79 |
-    \ setlocal expandtab |
-    \ setlocal autoindent |
-    \ setlocal fileformat=unix |
-  autocmd BufRead, BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+  autocmd Filetype python set
+    \ tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
+    \ textwidth=79
+    \ expandtab
+    \ autoindent
+    \ fileformat=unix
 " }}}
 
 " C++ {{{
-  au BufNewFile, BufRead *.cpp,*.cc,*.hpp,*.h,*.c
-    \ setlocal expandtab |
-    \ setlocal tabstop=4 |
-    \ setlocal softtabstop=4 |
-    \ setlocal shiftwidth=4
+  autocmd Filetype cpp set
+    \ tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
 " }}}
-
 
 set laststatus=2
