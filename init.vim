@@ -6,14 +6,16 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'vim-airline/vim-airline-themes'
   Plug 'chriskempson/base16-vim'
 
-  " NAVIGATION/POWER TOOLS
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " NAVIGATION TOOLS
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'scrooloose/nerdtree'
   Plug 'majutsushi/tagbar'
   Plug 'tpope/vim-fugitive'
 
   " TEXTUAL PRODUCTIVITY TOOLS
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/neosnippet.vim'
+  Plug 'Shougo/neosnippet-snippets'
   Plug 'ervandew/supertab'
   Plug 'Konfekt/FastFold'
   Plug 'tpope/vim-sensible'
@@ -56,20 +58,22 @@ au BufNewFile,BufRead *.ejs set filetype=html
   set pastetoggle=<F2>
   " Toggle Tagbar
   nmap <S-T> :TagbarToggle<CR>
-  " Exit from vim in normal mode
-  nnoremap <C-D> :q<cr>
-  " Esc is too far 
-  nnoremap <C-C> <Esc>
-  vnoremap <C-C> <Esc>
-  inoremap <C-C> <Esc>
   " Space opens/closes folds
   nnoremap <space> za
   " Edit/load init.vim bindings
   nnoremap <leader>ev :vsp $MYNVIMRC<CR> 
   nnoremap <leader>sv :source $MYNVIMRC<CR>
+  " Exit from vim in normal mode
+  nnoremap <C-D> :q<cr>
+  " Esc is too far 
+  nnoremap <C-C> <Esc>
+  inoremap <C-C> <Esc>
+  " Windows-like undo
+  nnoremap <C-Z> u
+  inoremap <C-Z> <C-O>:undo<CR>
   " Use C-s for saving
-  noremap <C-S> :update<CR>
-  vnoremap <C-S> <C-C>:update<CR>
+  nnoremap <C-S> :update<CR>
+  snoremap <C-S> <C-C>:update<CR>
   inoremap <C-S> <Esc>:update<CR>
   " Quick switch tabs
   nnoremap <C-E> gt
@@ -86,6 +90,8 @@ au BufNewFile,BufRead *.ejs set filetype=html
   xnoremap <leader>p "_dP
   " Copy to system clipboard
   noremap <leader>y "+y
+  " Comment shortcut
+  xnoremap <C-/> :TComment<CR>
 " }}}
 
 " Folding {{{
@@ -114,6 +120,7 @@ au BufNewFile,BufRead *.ejs set filetype=html
   set autoread                              " Automatically reread changed files
   set mouse=a                               " Automatically enable mouse usage
   set mousehide                             " Hide the mouse cursor while typing
+  set selectmode=mouse
   set hidden                                " Buffer settings
   set showmode                              " Show current mode
   set nowrap                                " Do not wrap long lines
@@ -146,6 +153,12 @@ au BufNewFile,BufRead *.ejs set filetype=html
   let g:neomake_javascript_enabled_makers = []
   nnoremap <leader>lo :lopen <CR>
   " }}}
+
+" NeoSnippets {{{
+  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k>     <Plug>(neosnippet_expand_target)
+" }}}
 
 " NERDTree {{{
   " Open NERDTree automatically when vim opens a directory
@@ -182,6 +195,7 @@ au BufNewFile,BufRead *.ejs set filetype=html
 
 " Vim-Airline {{
   let g:airline_powerline_fonts = 1
+  let g:airline#extensions#tabline#enabled = 1
 " }}}
 
 " Base16 Shell {{{
