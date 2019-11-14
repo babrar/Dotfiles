@@ -102,6 +102,18 @@ customize_vim(){
 }
 
 customize_shell(){
+
+  install_powerline_fonts(){
+    # clone
+    git clone https://github.com/powerline/fonts.git --depth=1
+    # install
+    cd fonts
+    ./install.sh
+    # clean-up a bit
+    cd ..
+    rm -rf fonts
+  }
+
   sudo apt-get install -y zsh tmux
   cp $DOTFILES_DIR/.tmux.conf .
   # install oh-my-zsh
@@ -109,6 +121,9 @@ customize_shell(){
   # Dont run zsh after installation
   export RUNZSH=no
   sh install.sh
+  rm -f install.sh
+  # zsh plugins
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
   # base16
   git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
   # powerline fonts
@@ -117,8 +132,16 @@ customize_shell(){
   cp $DOTFILES_DIR/.zshrc $HOME
   this_user=$(whoami)
   sed -i "s/babrar/$this_user/g" .zshrc
-  # remove install files
+  # NERD FONTS
+  mkdir -p patched-fonts
+  FONT_NAME=FiraCode
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/${FONT_NAME}.zip -P patched-fonts
+  unzip patched-fonts/${FONT_NAME}.zip -d patched-fonts/${FONT_NAME}
+  wget https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/install.sh
+  chmod +x install.sh
+  ./install.sh ${FONT_NAME}
   rm -f install.sh
+  rm -rf patched-fonts
 }
 
 install_alacritty(){
@@ -132,17 +155,6 @@ install_alacritty(){
   gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/alacritty
   # remove install files
   rm -f Alacritty-v0.3.3-ubuntu_18_04_amd64.deb
-}
-
-install_powerline_fonts(){
-  # clone
-  git clone https://github.com/powerline/fonts.git --depth=1
-  # install
-  cd fonts
-  ./install.sh
-  # clean-up a bit
-  cd ..
-  rm -rf fonts
 }
 
 setup_gestures() {
@@ -206,9 +218,10 @@ To obtain gestures, after logging in run :
 To automate the process, add the command above to startup commands.
 
 TIPS:
-Use alacritty instead of gnome-terminal.
-Use base16_material-darker theme for best results.
-For JS development in nvim, run :CocInstall coc-tsserver 
+> Suggested theme: base16_material
+> Language server setup (nvim) :CocInstall coc-tsserver
+> NERD Fonts: In gnome-tweaks set monospace to NERD font &&
+              In gnome-terminal Preferences uncheck custom font
 EOF
 printf "$RESET"
 

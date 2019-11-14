@@ -8,9 +8,12 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   " NAVIGATION TOOLS
   Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'ryanoasis/vim-devicons'
   Plug 'scrooloose/nerdtree'
   Plug 'majutsushi/tagbar'
   Plug 'tpope/vim-fugitive'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
   " TEXTUAL PRODUCTIVITY TOOLS
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -43,19 +46,12 @@ call plug#begin('~/.local/share/nvim/plugged')
 call plug#end()
 
 filetype plugin indent on
-" Set syntax highlighting for *.ejs same as html
+" ejs is html
 au BufNewFile,BufRead *.ejs set filetype=html
-
-" Spacing {{{
-  set expandtab                             " Tabs are spaces
-  set tabstop=2 shiftwidth=2 softtabstop=2  " Default tabwidth
-" }}}
 
 " General Bindings {{{
   " Change mapleader
   let mapleader = ","
-  " Toggle paste mode (not needed for nvim)
-  set pastetoggle=<F2>
   " Toggle Tagbar
   nmap <S-T> :TagbarToggle<CR>
   " Space opens/closes folds
@@ -111,6 +107,8 @@ au BufNewFile,BufRead *.ejs set filetype=html
 " }}}
 
 " Miscellaneous {{{
+  set expandtab                             " Tabs are spaces
+  set tabstop=2 shiftwidth=2 softtabstop=2  " Default tabwidth
   set showcmd                               " Show partial command while typing
   set ruler                                 " Show line/column number of cursor
   set nostartofline                         " Don't reset cursor to line start
@@ -152,7 +150,7 @@ au BufNewFile,BufRead *.ejs set filetype=html
   " disable NM for js. use coc instead.
   let g:neomake_javascript_enabled_makers = []
   nnoremap <leader>lo :lopen <CR>
-  " }}}
+" }}}
 
 " NeoSnippets {{{
   imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -160,7 +158,7 @@ au BufNewFile,BufRead *.ejs set filetype=html
   xmap <C-k>     <Plug>(neosnippet_expand_target)
 " }}}
 
-" NERDTree {{{
+" NERDTree family {{{
   " Open NERDTree automatically when vim opens a directory
   autocmd StdinReadPre * let s:std_in=1
   autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
@@ -168,10 +166,16 @@ au BufNewFile,BufRead *.ejs set filetype=html
   map <C-n> :NERDTreeToggle<CR>
   " Close vim if NERDTree is the only open window
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-  " Change default arrows
-  let g:NERDTreeDirArrowExpandable = '▸'
-  let g:NERDTreeDirArrowCollapsible = '▾'
   let g:NERDTreeShowHidden=1
+  let g:NERDTreeIgnore = ['^node_modules$']
+  
+  " NERDTree Git Plugin
+  let g:NERDTreeGitStatusWithFlags = 1
+  
+  " NERDTree Syntax Highlight
+  let g:NERDTreeFileExtensionHighlightFullName = 1
+  let g:NERDTreeExactMatchHighlightFullName = 1
+  let g:NERDTreePatternMatchHighlightFullName = 1
 " }}}
 
 " FastFold {{{
@@ -191,6 +195,10 @@ au BufNewFile,BufRead *.ejs set filetype=html
 " Supertab {{{
   " Reverse tab order in dropdown list
   let g:SuperTabDefaultCompletionType = "<c-n>"
+" }}}
+
+" CtrlP {{{
+  let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 " }}}
 
 " Vim-Airline {{

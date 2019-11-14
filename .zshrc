@@ -69,8 +69,10 @@ plugins=(
   git
   git-extras
   command-not-found
+  python
   docker
   npm
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
