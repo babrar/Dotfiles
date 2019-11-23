@@ -81,7 +81,7 @@ install_docker(){
 }
 
 install_misc_tools(){
-  sudo apt-get install -y screenfetch neofetch htop mlocate
+  sudo apt-get install -y screenfetch neofetch htop mlocate fdfind
 }
 
 customize_vim(){
@@ -217,7 +217,8 @@ To obtain gestures, after logging in run :
 
 To automate the process, add the command above to startup commands.
 
-TIPS:
+TIPS & Remaining stuff:
+> Install FZF with no-update-rc option
 > Suggested theme: base16_material
 > Language server setup (nvim) :CocInstall coc-tsserver
 > NERD Fonts: In gnome-tweaks set monospace to NERD font &&

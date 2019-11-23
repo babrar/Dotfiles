@@ -7,11 +7,13 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'chriskempson/base16-vim'
 
   " NAVIGATION TOOLS
-  Plug 'ctrlpvim/ctrlp.vim'
+  " Plug 'ctrlpvim/ctrlp.vim'
+  Plug '~/.fzf'
+  Plug 'junegunn/fzf.vim'
   Plug 'ryanoasis/vim-devicons'
   Plug 'scrooloose/nerdtree'
   Plug 'majutsushi/tagbar'
-  Plug 'tpope/vim-fugitive'
+  " Plug 'tpope/vim-fugitive'
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
@@ -19,7 +21,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/neosnippet.vim'
   Plug 'Shougo/neosnippet-snippets'
-  Plug 'ervandew/supertab'
+  " Plug 'ervandew/supertab'
   Plug 'Konfekt/FastFold'
   Plug 'tpope/vim-sensible'
   Plug 'ntpeters/vim-better-whitespace'
@@ -34,7 +36,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   " JS TOOLS
   Plug 'pangloss/vim-javascript'
-  
+
   " C,C++ TOOLS
   Plug 'deoplete-plugins/deoplete-clang'
   Plug 'octol/vim-cpp-enhanced-highlight'
@@ -57,11 +59,11 @@ au BufNewFile,BufRead *.ejs set filetype=html
   " Space opens/closes folds
   nnoremap <space> za
   " Edit/load init.vim bindings
-  nnoremap <leader>ev :vsp $MYNVIMRC<CR> 
+  nnoremap <leader>ev :vsp $MYNVIMRC<CR>
   nnoremap <leader>sv :source $MYNVIMRC<CR>
   " Exit from vim in normal mode
   nnoremap <C-D> :q<cr>
-  " Esc is too far 
+  " Esc is too far
   nnoremap <C-C> <Esc>
   inoremap <C-C> <Esc>
   " Windows-like undo
@@ -69,7 +71,6 @@ au BufNewFile,BufRead *.ejs set filetype=html
   inoremap <C-Z> <C-O>:undo<CR>
   " Use C-s for saving
   nnoremap <C-S> :update<CR>
-  snoremap <C-S> <C-C>:update<CR>
   inoremap <C-S> <Esc>:update<CR>
   " Quick switch tabs
   nnoremap <C-E> gt
@@ -79,10 +80,10 @@ au BufNewFile,BufRead *.ejs set filetype=html
   vnoremap <C-Q> gT
   inoremap <C-Q> gT
   " Delete for real
+  nnoremap x "_x
+  xnoremap x "_x
   nnoremap <leader>d "_d
   xnoremap <leader>d "_d
-  nnoremap <leader>x "_x
-  xnoremap <leader>x "_x
   xnoremap <leader>p "_dP
   " Copy to system clipboard
   noremap <leader>y "+y
@@ -168,10 +169,10 @@ au BufNewFile,BufRead *.ejs set filetype=html
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   let g:NERDTreeShowHidden=1
   let g:NERDTreeIgnore = ['^node_modules$']
-  
+
   " NERDTree Git Plugin
   let g:NERDTreeGitStatusWithFlags = 1
-  
+
   " NERDTree Syntax Highlight
   let g:NERDTreeFileExtensionHighlightFullName = 1
   let g:NERDTreeExactMatchHighlightFullName = 1
@@ -195,6 +196,15 @@ au BufNewFile,BufRead *.ejs set filetype=html
 " Supertab {{{
   " Reverse tab order in dropdown list
   let g:SuperTabDefaultCompletionType = "<c-n>"
+" }}}
+
+" FZF {{{
+  " let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
+  " Launch fzf with CTRL+P.
+  nnoremap <silent> <C-p> :FZF -m<CR>
+  " Map a few common things to do with FZF.
+  nnoremap <silent> <Leader><Enter> :Buffers<CR>
+  nnoremap <silent> <Leader>l :Lines<CR>
 " }}}
 
 " CtrlP {{{
