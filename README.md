@@ -1,3 +1,4 @@
+
 # Dotfiles
 *Disclaimer: I am not an Arch user.*
 
@@ -23,11 +24,11 @@ Here's  a summary of my setup.
 #### Vim-workflow:
 ![](static/vim-workflow.gif)
 
-**PS:** Also, here's all about me in a nutshell:
-nvim > vim > emacs
-Ubuntu > Arch
-tmux > tabbed terminals
-spaces > tabs
+**PS:** Also, here's all about me in a nutshell:  
+*nvim > vim > emacs  
+Ubuntu > Arch  
+tmux > tabbed terminals  
+spaces > tabs*  
 
 dont come @ me.
 
