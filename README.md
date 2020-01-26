@@ -18,10 +18,10 @@ Here's  a summary of my setup.
 |Editor| nvim|
 | Shell plugins | fzf w/ oh-my-zsh plugins |
 
-#### Shell:
+## Shell:
 ![](static/my-shell-workflow.gif)
 
-#### Vim-workflow:
+## Vim:
 ![](static/vim-workflow.gif)
 
 **PS:** Also, here's all about me in a nutshell:  
