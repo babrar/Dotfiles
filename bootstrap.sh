@@ -39,7 +39,7 @@ setup_color() {
 
 install_essentials(){
   # essential utilities
-  sudo apt-get install -y g++ clang llvm-dev cmake wget curl git neovim wmctrl xdotool libinput-tools
+  sudo apt-get install -y g++ clang llvm-dev cmake wget curl git neovim wmctrl
   sudo ln -s /usr/lib/llvm-9/lib/libclang-9.so.1 /usr/lib/llvm-9/lib/libclang.so
 }
 
@@ -49,28 +49,13 @@ install_python(){
   sudo apt-get install -y python3-pip
   sudo apt-get install -y python-dev
   sudo apt-get install -y python3-dev
+
+  python3 -m pip install jupyter jupyterlab
 }
 
 get_dotfiles(){
   git clone https://github.com/babrar/Dotfiles.git
   export DOTFILES_DIR=$HOME/Dotfiles
-}
-
-# Machine independant (Debian specific instruction is mentioned elsewhere)
-install_docker_ce(){
-  # Install Docker
-  sudo apt-get update
-  sudo apt-get -yy install apt-transport-https ca-certificates curl software-properties-common wget pwgen
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-  sudo apt-get update && sudo apt-get -y install docker-ce
-
-  # Install Docker Compose
-  sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-  sudo chmod +x /usr/local/bin/docker-compose
-
-  # Allow current user to run Docker commands
-  sudo usermod -aG docker $USER
 }
 
 # Debian specific (suited for newer machines)
@@ -158,6 +143,7 @@ install_alacritty(){
 }
 
 setup_gestures() {
+  sudo apt-get install -y xdotool libinput-tools
   sudo gpasswd -a $USER input
   git clone https://github.com/bulletmark/libinput-gestures
   cd libinput-gestures
@@ -167,10 +153,11 @@ setup_gestures() {
 }
 
 customize_gnome() {
-# enable fractional scaling for X11
-gsettings set org.gnome.mutter experimental-features "['x11-randr-fractional-scaling']"
-# turn off bluetooth by default
-sudo systemctl disable bluetooth.service
+  sudo apt-get install -y gnome-tweaks
+  # enable fractional scaling for X11
+  gsettings set org.gnome.mutter experimental-features "['x11-randr-fractional-scaling']"
+  # turn off bluetooth by default
+  sudo systemctl disable bluetooth.service
 }
 
 
