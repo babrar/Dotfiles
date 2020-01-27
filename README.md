@@ -2,7 +2,7 @@
 # Dotfiles
 *Disclaimer: I am not an Arch user.*
 
-I tend to tinker with shell configs and vim plugins on my free time. 
+I tend to tinker with shell configs and vim plugins in my free time. 
 
 From my days of disto hopping and vim-tweaks, I have accumulated a crap ton of custom config files. This repo is a deployable dump of all those configs.
 
