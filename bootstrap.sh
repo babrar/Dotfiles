@@ -147,7 +147,7 @@ setup_gestures() {
   sudo gpasswd -a $USER input
   git clone https://github.com/bulletmark/libinput-gestures
   cd libinput-gestures
-  sudo. /libinput-gestures-setup install
+  sudo ./libinput-gestures-setup install
   cd ..
   cp $DOTFILES_DIR/libinput-gestures.conf ./config/
 }
