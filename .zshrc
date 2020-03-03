@@ -16,6 +16,7 @@ plugins=(
   python
   docker
   npm
+  yarn
   zsh-autosuggestions
 )
 
@@ -34,7 +35,7 @@ export VISUAL=nvim
 
 # Add local lib to path
 export PATH="$PATH:$HOME/.local/bin"
-
+export PATH="$PATH:/opt"
 # FUZZY FINDER
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND="fdfind --hidden --type f -E .git -E .vscode -E __pycache__ -E node_modules"
@@ -97,7 +98,7 @@ alias pull='git pull'
 alias push='git push'
 alias stash='git stash'
 alias status='git status'
-
+alias dog='highlight -O ansi --force'
 # FUNCTIONS
 function mkd ()
 {

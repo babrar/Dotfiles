@@ -66,7 +66,7 @@ install_docker(){
 }
 
 install_misc_tools(){
-  sudo apt-get install -y screenfetch neofetch htop mlocate fdfind
+  sudo apt-get install -y screenfetch neofetch htop mlocate fdfind highlight
 }
 
 customize_vim(){
