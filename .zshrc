@@ -116,6 +116,10 @@ function kill-session-tmux ()
   fi
 }
 
+function open()
+{
+  xdg-open "$1"
+}
 # key binding
 zle -N kill-session-tmux
 bindkey '^d' kill-session-tmux
